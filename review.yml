@@ -1,0 +1,57 @@
+---
+name: University of Maryland College Park
+description: University of Maryland College Park public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      UMD has no central official public developer portal. The strongest
+      confirmed, documented programmatic footprint is umd.io, a student-run
+      open-source REST API at api.umd.io/v1 (verified live, 200) covering
+      courses, sections, professors, bus, map/buildings, and majors with docs at
+      beta.umd.io (200). The Registrar's Testudo Schedule of Classes is a public
+      web app (200) but not a documented JSON API. The DRUM DSpace repository is
+      publicly browsable (200) though standard OAI-PMH/REST endpoint paths
+      returned 404. Identity SSO (Shibboleth) and a status page were probed but
+      are not public APIs. No endpoints were fabricated; only confirmed URLs are
+      cataloged.
+    endpoints:
+      - url: https://umd.io
+        status: 200
+        note: umd.io landing page, student-run open API project.
+      - url: https://beta.umd.io
+        status: 200
+        note: umd.io v1 API documentation (endpoints, base URL).
+      - url: https://api.umd.io/v1/courses
+        status: 200
+        note: Live umd.io v1 courses endpoint, JSON, no auth.
+      - url: https://api.umd.io/v1
+        status: 200
+        note: umd.io v1 base URL responds.
+      - url: https://github.com/umdio
+        status: 200
+        note: umd.io GitHub org (umdio, umdio-data, website repos).
+      - url: https://app.testudo.umd.edu/soc/
+        status: 200
+        note: Testudo Schedule of Classes public web interface.
+      - url: https://www.testudo.umd.edu/
+        status: 200
+        note: Office of the Registrar Testudo portal.
+      - url: https://drum.lib.umd.edu
+        status: 200
+        note: DRUM DSpace institutional repository, public.
+      - url: https://drum.lib.umd.edu/server/oai/request?verb=Identify
+        status: 404
+        note: DSpace OAI-PMH endpoint not found at standard path.
+      - url: https://www.umd.edu
+        status: 200
+        note: Official university website.
+      - url: https://shib.idm.umd.edu/shibboleth-idp/profile/SAML2/Redirect/SSO
+        status: 500
+        note: Shibboleth SAML IdP (SSO, not a public API).
+      - url: https://status.umd.edu
+        status: 0
+        note: No public status page resolved at this host.
