@@ -1,0 +1,30 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.umd.io/v1/courses/MATH140"
+  },
+  "response": [
+    {
+      "course_id": "MATH140",
+      "semester": "202608",
+      "name": "Calculus I",
+      "dept_id": "MATH",
+      "department": "Mathematics",
+      "credits": "4",
+      "description": "Introduction to calculus, including functions, limits, continuity, derivatives and applications of the derivative, sketching of graphs of functions, definite and indefinite integrals, and calculation of area. The course is especially recommended for science, engineering and mathematics majors.",
+      "grading_method": ["Regular", "Pass-Fail", "Audit"],
+      "gen_ed": [["FSAR", "FSMA"]],
+      "core": [],
+      "relationships": {
+        "coreqs": null,
+        "prereqs": "Minimum grade of C- in MATH115; or must have math eligibility of MATH140; and math eligibility is based on the Math Placement Test.",
+        "formerly": null,
+        "restrictions": null,
+        "additional_info": "Graphing calculators, or computers, etc., with software appropriate for graphing non-trivial functions and doing non-trivial calculations, will be needed.",
+        "also_offered_as": null,
+        "credit_granted_for": null
+      },
+      "sections": []
+    }
+  ]
+}

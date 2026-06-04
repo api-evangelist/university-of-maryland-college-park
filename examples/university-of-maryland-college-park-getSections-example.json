@@ -1,0 +1,28 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.umd.io/v1/courses/sections/ENGL101-0101"
+  },
+  "response": [
+    {
+      "course": "ENGL101",
+      "section_id": "ENGL101-0101",
+      "semester": "201501",
+      "number": "0101",
+      "seats": "22",
+      "meetings": [
+        {
+          "days": "MWF",
+          "room": "1117",
+          "building": "TWS",
+          "classtype": "",
+          "start_time": "9:00am",
+          "end_time": "9:50am"
+        }
+      ],
+      "open_seats": "0",
+      "waitlist": "0",
+      "instructors": ["Aaron Bartlett"]
+    }
+  ]
+}

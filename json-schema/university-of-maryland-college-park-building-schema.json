@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.umd.io/v1/schemas/building.json",
+  "title": "Building",
+  "description": "Represents a building on the University of Maryland campus in the umd.io API.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the building.",
+      "examples": ["Edward St. John Learning and Teaching Center"]
+    },
+    "code": {
+      "type": "string",
+      "description": "Shortened building code. Not all buildings have these.",
+      "examples": ["ESJ"]
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique building id.",
+      "examples": ["226"]
+    },
+    "long": {
+      "type": "number",
+      "description": "Longitude.",
+      "examples": [-76.941914]
+    },
+    "lat": {
+      "type": "number",
+      "description": "Latitude.",
+      "examples": [38.986699]
+    }
+  }
+}

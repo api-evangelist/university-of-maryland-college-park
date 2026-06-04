@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api.umd.io/v1/structures/course.json",
+  "name": "Course",
+  "type": "object",
+  "description": "JSON Structure for a University of Maryland course from the umd.io API.",
+  "properties": {
+    "course_id": { "type": "string", "description": "Unique course ID, four-letter dept code + three-digit number + optional letter." },
+    "semester": { "type": "string", "description": "Semester in YYYYMM format." },
+    "name": { "type": "string", "description": "Course name." },
+    "dept_id": { "type": "string", "description": "Four letter department code." },
+    "department": { "type": "string", "description": "Full department name." },
+    "credits": { "type": "string", "description": "Number of credits." },
+    "description": { "type": "string", "description": "Course description from Testudo." },
+    "grading_method": { "type": "array", "items": { "type": "string" }, "description": "Available grading options." },
+    "gen_ed": {
+      "type": "array",
+      "items": { "type": "array", "items": { "type": "string" } },
+      "description": "General Education requirements fulfilled (OR of ANDs)."
+    },
+    "core": { "type": "array", "items": { "type": "string" }, "description": "CORE requirements filled." },
+    "relationships": {
+      "type": "object",
+      "properties": {
+        "coreqs": { "type": ["string", "null"] },
+        "prereqs": { "type": ["string", "null"] },
+        "formerly": { "type": ["string", "null"] },
+        "restrictions": { "type": ["string", "null"] },
+        "additional_info": { "type": ["string", "null"] },
+        "also_offered_as": { "type": ["string", "null"] },
+        "credit_granted_for": { "type": ["string", "null"] }
+      }
+    },
+    "sections": { "type": "array", "items": { "type": "string" }, "description": "Section ids or full section objects." }
+  }
+}

@@ -1,0 +1,71 @@
+formats: [oas3]
+rules:
+  umd-info-contact:
+    description: API info should include a contact email (umd.io publishes hi@umd.io).
+    severity: warn
+    formats: [oas3]
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  umd-info-license:
+    description: API info should declare a license (umd.io is MIT licensed).
+    severity: warn
+    formats: [oas3]
+    given: $.info
+    then:
+      field: license
+      function: truthy
+
+  umd-server-is-umd-io:
+    description: Servers should point at the official api.umd.io host.
+    severity: error
+    formats: [oas3]
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: "^https://api\\.umd\\.io"
+
+  umd-operation-has-operationid:
+    description: Every operation should have an operationId (umd.io names each one).
+    severity: error
+    formats: [oas3]
+    given: $.paths[*][get]
+    then:
+      field: operationId
+      function: truthy
+
+  umd-get-only:
+    description: umd.io is a read-only (GETful) API; only GET operations are expected.
+    severity: warn
+    formats: [oas3]
+    given: $.paths[*]
+    then:
+      field: get
+      function: truthy
+
+  umd-operation-tagged:
+    description: Operations should be tagged with one of the known umd.io domains.
+    severity: warn
+    formats: [oas3]
+    given: $.paths[*][get].tags[*]
+    then:
+      function: enumeration
+      functionOptions:
+        values:
+          - courses
+          - professors
+          - bus
+          - map
+          - majors
+
+  umd-error-schema-present:
+    description: Error responses should reference the shared Error schema.
+    severity: warn
+    formats: [oas3]
+    given: $.paths[*][get].responses[?(@property=='400' || @property=='404')].content.application/json.schema
+    then:
+      field: $ref
+      function: truthy

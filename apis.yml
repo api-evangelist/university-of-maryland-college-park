@@ -45,6 +45,14 @@ apis:
         url: https://beta.umd.io
       - type: GitHub
         url: https://github.com/umdio/umdio
+      - type: OpenAPI
+        url: openapi/university-of-maryland-college-park-umdio.yaml
+      - type: Rules
+        url: rules/university-of-maryland-college-park-rules.yml
+      - type: Vocabulary
+        url: vocabulary/university-of-maryland-college-park-vocabulary.yml
+      - type: JSONLD
+        url: json-ld/university-of-maryland-college-park-context.jsonld
   - aid: university-of-maryland-college-park:testudo-soc
     name: Testudo Schedule of Classes
     description: >-

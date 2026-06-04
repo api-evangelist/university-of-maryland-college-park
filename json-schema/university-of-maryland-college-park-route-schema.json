@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.umd.io/v1/schemas/route.json",
+  "title": "Route",
+  "description": "Represents a UMD Shuttle-UM bus route in the umd.io API. Route data is provided via NextBus.",
+  "type": "object",
+  "properties": {
+    "route_id": {
+      "type": "string",
+      "description": "A unique three digit route number.",
+      "examples": ["701"]
+    },
+    "title": {
+      "type": "string",
+      "description": "String name of the route.",
+      "examples": ["701 UMB BioPark"]
+    },
+    "stops": {
+      "type": "array",
+      "description": "Array of stops on the route.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "stop_id": { "type": "string", "examples": ["laplat"] },
+          "title": { "type": "string", "examples": ["La Plata Hall"] },
+          "lat": { "type": "number" },
+          "long": { "type": "number" }
+        }
+      }
+    },
+    "directions": {
+      "type": "array",
+      "description": "Array of directions the bus travels.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "direction_id": { "type": "string", "examples": ["ramsapts"] },
+          "title": { "type": "string", "examples": ["Ramsay St Apts"] },
+          "stops": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "paths": {
+      "type": "array",
+      "description": "Lat/Long points to draw the route on a map.",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "long": { "type": "number" }
+          }
+        }
+      }
+    },
+    "lat_max": { "type": "number", "examples": [39.2995236] },
+    "lat_min": { "type": "number", "examples": [39.28301] },
+    "long_max": { "type": "number", "examples": [-76.620848] },
+    "long_min": { "type": "number", "examples": [-76.6320545] }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.umd.io/v1/bus/routes/701"
+  },
+  "response": {
+    "data": {
+      "route_id": "701",
+      "title": "701 UMB BioPark",
+      "stops": [
+        { "stop_id": "laplat", "title": "La Plata Hall", "lat": -76.94563, "long": 38.9922185 }
+      ],
+      "directions": [
+        { "direction_id": "ramsapts", "title": "Ramsay St Apts", "stops": ["laplat"] }
+      ],
+      "lat_max": 39.2995236,
+      "lat_min": 39.28301,
+      "long_max": -76.620848,
+      "long_min": -76.6320545
+    },
+    "count": 1
+  }
+}

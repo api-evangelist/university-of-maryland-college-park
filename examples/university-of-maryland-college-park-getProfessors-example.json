@@ -1,0 +1,14 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.umd.io/v1/professors?name=Aaron%20Bartlett"
+  },
+  "response": [
+    {
+      "name": "Aaron Bartlett",
+      "taught": [
+        { "semester": 202001, "course": "ENGL101" }
+      ]
+    }
+  ]
+}

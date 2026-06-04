@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api.umd.io/v1/schemas/major.json",
+  "title": "Major",
+  "description": "Represents a major offered at the University of Maryland in the umd.io API.",
+  "type": "object",
+  "properties": {
+    "major_id": {
+      "type": "number",
+      "description": "Numeric id of a major. An ascending count, no real meaning.",
+      "examples": [19]
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the major.",
+      "examples": ["Behavioral and Community Health"]
+    },
+    "college": {
+      "type": "string",
+      "description": "The college the major is under.",
+      "examples": ["School of Public Health"]
+    },
+    "url": {
+      "type": "string",
+      "description": "Home page for the major.",
+      "examples": ["http://sph.umd.edu/department/bch/"]
+    }
+  }
+}
