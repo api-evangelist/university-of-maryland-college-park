@@ -79,6 +79,8 @@ apis:
       - type: Documentation
         url: https://drum.lib.umd.edu
 common:
+  - type: DomainSecurity
+    url: security/university-of-maryland-college-park-domain-security.yml
   - type: Website
     url: https://www.umd.edu
   - type: GitHub
@@ -93,6 +95,8 @@ common:
     url: finops/university-of-maryland-college-park-finops.yml
   - type: Review
     url: review.yml
+  - url: https://today.umd.edu/rss
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
