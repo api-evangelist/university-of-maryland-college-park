@@ -79,6 +79,8 @@ apis:
       - type: Documentation
         url: https://drum.lib.umd.edu
 common:
+  - type: AgenticAccess
+    url: agentic-access/university-of-maryland-college-park-agentic-access.yml
   - type: DomainSecurity
     url: security/university-of-maryland-college-park-domain-security.yml
   - type: Website
