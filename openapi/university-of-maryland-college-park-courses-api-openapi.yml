@@ -1,0 +1,568 @@
+openapi: 3.0.1
+info:
+  title: umd.io bus courses API
+  description: 'Welcome to umd.io, the open-source API for University of Maryland data. If you are building a University data-focused app, hack, or project, you’re in the right place. This site will walk you through basic API use and document all supported API calls.
+
+
+    umd.io is a GETful API. It follows RESTful conventions, but for now, you can only get data – you can’t create, update, or destroy.
+
+
+    We''re now in version 1! We might add new endpoints or more data to existing responses, but we won''t remove anything without a major version change.
+
+
+    If you''re looking for the v0 docs, you can find them at https://docs.umd.io/. Please note that v0 is deprecated. It will continue to be supported until at least 2021, but will get no further feature updates, and will eventually be discontinued.
+
+
+    We are actively looking for contributors! Tweet, email, or otherwise get in touch with us.'
+  contact:
+    email: hi@umd.io
+  license:
+    name: MIT
+    url: https://github.com/umdio/umdio/blob/master/LICENSE
+  version: 1.0.0 Beta
+servers:
+- url: https://api.umd.io/v1
+tags:
+- name: courses
+  description: This set of endpoints lets you get data about university courses and their sections. You can get one course or section at a time, several courses or sections at a time, or a list of all the courses. All the data is scraped from Testudo.
+paths:
+  /courses:
+    get:
+      tags:
+      - courses
+      summary: List of courses
+      description: Returns paginated list of courses
+      operationId: getCourses
+      parameters:
+      - $ref: '#/components/parameters/sortParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/perPageParam'
+      - $ref: '#/components/parameters/semesterParam'
+      - $ref: '#/components/parameters/creditsParam'
+      - $ref: '#/components/parameters/deptIdParam'
+      - $ref: '#/components/parameters/genEdParam'
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+  /courses/list:
+    get:
+      tags:
+      - courses
+      summary: List of minified courses
+      description: Returns list of all course codes and names
+      operationId: getCourseList
+      parameters:
+      - $ref: '#/components/parameters/sortParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/perPageParam'
+      - $ref: '#/components/parameters/semesterParam'
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    course_id:
+                      type: string
+                    name:
+                      type: string
+  /courses/sections:
+    get:
+      tags:
+      - courses
+      summary: List of sections
+      description: Returns paginated list of sections
+      operationId: getSections
+      parameters:
+      - $ref: '#/components/parameters/sortParam'
+      - $ref: '#/components/parameters/pageParam'
+      - $ref: '#/components/parameters/perPageParam'
+      - $ref: '#/components/parameters/courseIdParam'
+      - $ref: '#/components/parameters/seatsParam'
+      - $ref: '#/components/parameters/openSeatsParam'
+      - $ref: '#/components/parameters/waitlistParam'
+      - $ref: '#/components/parameters/semesterParam'
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Section'
+  /courses/sections/{section_ids}:
+    get:
+      tags:
+      - courses
+      summary: View specific sections
+      description: Returns paginated list of sections
+      operationId: getSectionsByIds
+      parameters:
+      - $ref: '#/components/parameters/sectionIdsParam'
+      - $ref: '#/components/parameters/semesterParam'
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Section'
+        '400':
+          description: Malformed section id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Unknown section id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /courses/{course_ids}:
+    get:
+      tags:
+      - courses
+      summary: View specific courses
+      description: Returns info about one or more courses
+      operationId: getCoursesById
+      parameters:
+      - $ref: '#/components/parameters/courseIdsParam'
+      - $ref: '#/components/parameters/semesterParam'
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+        '400':
+          description: Malformed course id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Unknown course id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /courses/{course_ids}/sections:
+    get:
+      tags:
+      - courses
+      summary: View sections for a course
+      description: Returns info about one or more courses
+      operationId: getSectionsForCourse
+      parameters:
+      - $ref: '#/components/parameters/courseIdsParam'
+      - $ref: '#/components/parameters/semesterParam'
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Section'
+        '400':
+          description: Malformed course id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Unknown course id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /courses/{course_ids}/sections/{section_ids}:
+    get:
+      tags:
+      - courses
+      summary: View specific sections for a course
+      description: Returns info about one or more courses
+      operationId: getCourseSectionsById
+      parameters:
+      - $ref: '#/components/parameters/courseIdsParam'
+      - $ref: '#/components/parameters/sectionIdsParam'
+      - $ref: '#/components/parameters/semesterParam'
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Section'
+        '400':
+          description: Malformed course id or section id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Unknown course id or section id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /courses/semesters:
+    get:
+      tags:
+      - courses
+      summary: List semesters
+      description: Returns list of all available semesters, each in format YYYYMM
+      operationId: getSemesters
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                - '201901'
+                - '201905'
+                - '201908'
+  /courses/departments:
+    get:
+      tags:
+      - courses
+      summary: List departments
+      description: Returns list of all available departments
+      operationId: getDepartments
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                example:
+                - AAST
+                - CMSC
+                - MATH
+components:
+  parameters:
+    creditsParam:
+      in: query
+      name: credits
+      schema:
+        type: string
+      description: The number of credits to watch, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq.
+      example: 3|leq
+    sectionIdsParam:
+      in: path
+      name: section_ids
+      required: true
+      schema:
+        type: array
+        items:
+          type: string
+        description: One or more comma separated section ids, of format DEPTNNN-XXXX.
+      explode: true
+      example:
+      - ENGL101-0101
+      - MATH140-0201
+    deptIdParam:
+      in: query
+      name: dept_id
+      schema:
+        type: string
+      description: 4 Letter department code to search.
+      example: CMSC
+    pageParam:
+      in: query
+      name: page
+      schema:
+        type: number
+      description: For paginated responses, the page to view. 1-indexed. Defaults to 1 if omitted.
+      example: 3
+    sortParam:
+      in: query
+      name: sort
+      schema:
+        type: string
+      description: a comma-separated list of course properties. Defaults to ASCENDING order, use a - (minus) prefix for DESCENDING order. For example, ?sort=course_id,-credits sorts the results ASCENDING by course_id and DESCENDING by credits.
+      example: course_id,-credits
+    courseIdParam:
+      in: query
+      name: course_id
+      schema:
+        type: string
+      description: 7 or 8 digit course id. See the course object for more info.
+      example: CMSC216
+    courseIdsParam:
+      in: path
+      name: course_ids
+      required: true
+      schema:
+        type: array
+        items:
+          type: string
+        description: One or more comma separated course ids, in format DEPTNNN with up to 2 trailing characters.
+      explode: true
+      example:
+      - ENGL101
+      - MATH140
+      - CMSC388F
+    openSeatsParam:
+      in: query
+      name: open_seats
+      schema:
+        type: string
+      description: Number of open seats in a section, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq.
+      example: 5
+    perPageParam:
+      in: query
+      name: per_page
+      schema:
+        type: number
+      description: Endpoints that return a large amount of items are paginated to 30 items by default. You can use this parameter to set a page size up to 100.
+      example: 3
+    genEdParam:
+      in: query
+      name: gen_ed
+      schema:
+        type: string
+      description: Gened requirement to search.
+      example: DSNS
+    seatsParam:
+      in: query
+      name: seats
+      schema:
+        type: string
+      description: Number of total seats in a section, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq.
+      example: 200
+    waitlistParam:
+      in: query
+      name: waitlist
+      schema:
+        type: string
+      description: Number of people on the waitlist for a class, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq.
+      example: 10
+    semesterParam:
+      in: query
+      name: semester
+      schema:
+        type: string
+      description: 6-digit semester ID to search, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq.
+      example: 202008|leq
+  schemas:
+    Meeting:
+      type: object
+      description: A Meeting for a section of a course
+      properties:
+        days:
+          type: string
+          description: The days of the week that a course meets. Will be some combination of M, Tu, W, Th, F in that order.
+        room:
+          type: string
+          description: The room number the meeting is in.
+        building:
+          type: string
+          description: The building the meeting is in.
+        classtype:
+          type: string
+          description: Lecutre, Discussion, Lab, etc.
+        start_time:
+          type: string
+          description: The time the meeting starts, in format (x)y:zw[a|p]m (e.g. 10:45am, or 6:30pm)
+        end_time:
+          type: string
+          description: The time the meeting ends, in format (x)y:zw[a|p]m (e.g. 10:45am, or 6:30pm)
+    Section:
+      type: object
+      description: Represents a single section of a course.
+      properties:
+        course:
+          type: string
+          example: ENGL101
+          description: The associated course id
+        section_id:
+          type: string
+          example: ENGL101-0101
+          description: A unique section identifier, always the course_id with a four-digit section number appended to it.
+        semester:
+          type: number
+          example: 201501
+          description: Numeric representation of the semester, in format YYYYMM
+        number:
+          type: string
+          description: The other half of section_id
+        seats:
+          type: string
+          description: The number of seats for the section.
+        meetings:
+          type: array
+          items:
+            $ref: '#/components/schemas/Meeting'
+          description: Array of section meetings.
+        open_seats:
+          type: string
+          description: The number of open seats for the section.
+        waitlist:
+          type: string
+          description: The number of people on the waitlist.
+        instructors:
+          type: array
+          description: An array of professor names for the section
+          items:
+            type: string
+    Course:
+      type: object
+      description: Represents a course on Testudo
+      properties:
+        course_id:
+          type: string
+          example: MATH140
+          description: A unique string ID with a four-letter dept_id followed by a three digit course number and an optional letter.
+        semester:
+          type: number
+          example: 202001
+          description: Numeric representation of the semester, in format YYYYMM
+        name:
+          type: string
+          example: Calculus I
+          description: String name of the course.
+        dept_id:
+          type: string
+          example: MATH
+          description: Four letter department code
+        department:
+          type: string
+          example: Mathematics
+          description: Full name of the department that offers the course.
+        credits:
+          type: string
+          example: '4'
+          description: The number of credits the course is worth.
+        description:
+          type: string
+          example: Introduction to calculus, including functions, limits, continuity, derivatives and applications of the derivative, sketching of graphs of functions, definite and indefinite integrals, and calculation of area. The course is especially recommended for science, engineering and mathematics majors.
+          description: String description of the course, as it appears on Testudo.
+        grading_method:
+          type: array
+          items:
+            type: string
+          example:
+          - Regular
+          - Pass-Fail
+          - Audit
+          description: Array of string grading options available. The possible options are “Regular”, “Pass-Fail”, “Audit”, and “Sat-Fail”
+        gen_ed:
+          type: array
+          items:
+            type: array
+            items:
+              type: string
+          example:
+          - - FSAR
+            - FSMA
+          description: Strings representing the General Education requirements the course fulfills. Note that this is an array of arrays of strings. The outmost "layer" represents "or", while the inner one represents an and relationship. Additionally, if a gened credit is granted only when taken with another class, this will be represented using a pipe (|) with that class name. For instance, "X, Y or Z (if taken with C)" on Testudo will be returned as [[X, Y], [Z|C]] here.
+        core:
+          type: array
+          items:
+            type: string
+          example:
+          - MS
+          description: Array of strings of CORE requirements filled by a course.
+        relationships:
+          type: object
+          properties:
+            coreqs:
+              type: string
+              nullable: true
+              example: null
+              description: courses that must be taken with this one.
+            prereqs:
+              type: string
+              nullable: true
+              example: Minimum grade of C- in MATH115.
+              description: Requirements for taking this course.
+            formerly:
+              type: string
+              nullable: true
+              example: null
+              description: Previous course codes that were the same course.
+            restrictions:
+              type: string
+              nullable: true
+              example: null
+              description: Additional restrictions/requirements for taking the course.
+            additional_info:
+              type: string
+              nullable: true
+              example: Or must have math eligibility of MATH140 or higher; and math eligibility is based on the Math Placement Test.  All sections will require the use of a TI graphics calculator. Instructor will use a TI-83, TI-83+, or TI-86 calculator. If purchasing used books additional software may be required.
+              description: Any additional information listed on Testudo
+            also_offered_as:
+              type: string
+              nullable: true
+              example: null
+              description: Other course codes representing the same course, like in the case of cross-listing
+            credit_granted_for:
+              type: string
+              nullable: true
+              example: MATH120, MATH130, MATH136, MATH140 or MATH220.
+              description: Courses that are equivalent in credit.
+        sections:
+          type: array
+          items:
+            oneOf:
+            - type: string
+            - $ref: '#/components/schemas/Section'
+          example:
+          - MATH140-0111
+          - MATH140-0121
+          - MATH140-0131
+          - MATH140-0141
+          - MATH140-0211
+          - MATH140-0221
+          - MATH140-0231
+          - MATH140-0241
+          - MATH140-0311
+          - MATH140-0321
+          - MATH140-0112
+          - MATH140-0113
+          - MATH140-0122
+          - MATH140-0123
+          - MATH140-0132
+          - MATH140-0142
+          description: The sections of this course.
+    Error:
+      type: object
+      description: Represents an HTTP error
+      properties:
+        error_code:
+          type: number
+        message:
+          type: string
+        docs:
+          type: string
+externalDocs:
+  description: Github
+  url: https://github.com/umdio/umdio

@@ -1,0 +1,128 @@
+openapi: 3.0.1
+info:
+  title: umd.io bus map API
+  description: 'Welcome to umd.io, the open-source API for University of Maryland data. If you are building a University data-focused app, hack, or project, you’re in the right place. This site will walk you through basic API use and document all supported API calls.
+
+
+    umd.io is a GETful API. It follows RESTful conventions, but for now, you can only get data – you can’t create, update, or destroy.
+
+
+    We''re now in version 1! We might add new endpoints or more data to existing responses, but we won''t remove anything without a major version change.
+
+
+    If you''re looking for the v0 docs, you can find them at https://docs.umd.io/. Please note that v0 is deprecated. It will continue to be supported until at least 2021, but will get no further feature updates, and will eventually be discontinued.
+
+
+    We are actively looking for contributors! Tweet, email, or otherwise get in touch with us.'
+  contact:
+    email: hi@umd.io
+  license:
+    name: MIT
+    url: https://github.com/umdio/umdio/blob/master/LICENSE
+  version: 1.0.0 Beta
+servers:
+- url: https://api.umd.io/v1
+tags:
+- name: map
+  description: Data about things on campus, such as buildings, dining halls, and other facilities.
+paths:
+  /map/buildings:
+    get:
+      tags:
+      - map
+      summary: List buildings
+      description: Get a list of the available buildings.
+      operationId: getBuildings
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Building'
+  /map/buildings/{building_id}:
+    get:
+      tags:
+      - map
+      summary: Get buildings
+      description: Get location data about one or more buildings. Comma separated building numbers are the parameters.
+      operationId: getBuildingById
+      parameters:
+      - in: path
+        name: building_id
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+          example:
+          - '226'
+        description: Numeric building ID
+        explode: true
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Building'
+                  count:
+                    type: number
+                    description: Number of buildings returned
+                    example: 1
+        '400':
+          description: Malformed building code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Unknown building code
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      description: Represents an HTTP error
+      properties:
+        error_code:
+          type: number
+        message:
+          type: string
+        docs:
+          type: string
+    Building:
+      type: object
+      description: Represents a building on campus.
+      properties:
+        name:
+          type: string
+          description: Name of the building
+          example: Edward St. John Learning and Teaching Center
+        code:
+          type: string
+          description: Shortened building code. Not all buildings have these.
+          example: ESJ
+        id:
+          type: string
+          description: Unique building id
+          example: '226'
+        long:
+          type: number
+          description: Longitude
+          example: -76.941914
+        lat:
+          type: number
+          description: Latitude
+          example: 38.986699
+externalDocs:
+  description: Github
+  url: https://github.com/umdio/umdio

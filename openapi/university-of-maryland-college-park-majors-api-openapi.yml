@@ -1,0 +1,69 @@
+openapi: 3.0.1
+info:
+  title: umd.io bus majors API
+  description: 'Welcome to umd.io, the open-source API for University of Maryland data. If you are building a University data-focused app, hack, or project, you’re in the right place. This site will walk you through basic API use and document all supported API calls.
+
+
+    umd.io is a GETful API. It follows RESTful conventions, but for now, you can only get data – you can’t create, update, or destroy.
+
+
+    We''re now in version 1! We might add new endpoints or more data to existing responses, but we won''t remove anything without a major version change.
+
+
+    If you''re looking for the v0 docs, you can find them at https://docs.umd.io/. Please note that v0 is deprecated. It will continue to be supported until at least 2021, but will get no further feature updates, and will eventually be discontinued.
+
+
+    We are actively looking for contributors! Tweet, email, or otherwise get in touch with us.'
+  contact:
+    email: hi@umd.io
+  license:
+    name: MIT
+    url: https://github.com/umdio/umdio/blob/master/LICENSE
+  version: 1.0.0 Beta
+servers:
+- url: https://api.umd.io/v1
+tags:
+- name: majors
+  description: Data about the various majors offered on campus.
+paths:
+  /majors/list:
+    get:
+      tags:
+      - majors
+      summary: List majors
+      description: Get a list of all majors
+      operationId: getMajors
+      responses:
+        '200':
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Major'
+components:
+  schemas:
+    Major:
+      type: object
+      description: Represents a major
+      properties:
+        major_id:
+          type: number
+          description: Numeric id of a major. No real meaning here, just an ascending count.
+          example: 19
+        name:
+          type: string
+          description: The name of the major.
+          example: Behavioral and Community Health
+        college:
+          type: string
+          description: The college the major is under.
+          example: School of Public Health
+        url:
+          type: string
+          description: Home page for the major.
+          example: http://sph.umd.edu/department/bch/
+externalDocs:
+  description: Github
+  url: https://github.com/umdio/umdio
