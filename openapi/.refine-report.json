@@ -1,0 +1,22 @@
+{
+  "provider": "university-of-maryland-college-park",
+  "sources": [
+    "university-of-maryland-college-park-bus-api-openapi.yml",
+    "university-of-maryland-college-park-courses-api-openapi.yml",
+    "university-of-maryland-college-park-majors-api-openapi.yml",
+    "university-of-maryland-college-park-map-api-openapi.yml",
+    "university-of-maryland-college-park-professors-api-openapi.yml"
+  ],
+  "outputs": [
+    "university-of-maryland-college-park-bus-api-openapi.yml",
+    "university-of-maryland-college-park-courses-api-openapi.yml",
+    "university-of-maryland-college-park-majors-api-openapi.yml",
+    "university-of-maryland-college-park-map-api-openapi.yml",
+    "university-of-maryland-college-park-professors-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
