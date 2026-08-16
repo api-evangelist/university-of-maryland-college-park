@@ -5,9 +5,9 @@
       "source": "https://today.umd.edu/rss",
       "feed_url": "https://today.umd.edu/rss",
       "saved": 0,
-      "error": "no_feed_no_posts"
+      "error": "parse_failed"
     }
   ],
-  "fetched": "2026-08-06T14:08:46Z",
+  "fetched": "2026-08-15T12:11:08Z",
   "post_count": 10
 }
