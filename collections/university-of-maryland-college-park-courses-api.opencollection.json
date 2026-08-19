@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "umd.io bus courses API",
+    "version": "1.0.0 Beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "courses",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List of courses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses",
+            "params": [
+              {
+                "name": "sort",
+                "value": "course_id,-credits",
+                "type": "query",
+                "description": "a comma-separated list of course properties. Defaults to ASCENDING order, use a - (minus) prefix for DESCENDING order. For example, ?sort=course_id,-credits sorts the results ASCENDING by course_id and DESCENDING by credits."
+              },
+              {
+                "name": "page",
+                "value": "3",
+                "type": "query",
+                "description": "For paginated responses, the page to view. 1-indexed. Defaults to 1 if omitted."
+              },
+              {
+                "name": "per_page",
+                "value": "3",
+                "type": "query",
+                "description": "Endpoints that return a large amount of items are paginated to 30 items by default. You can use this parameter to set a page size up to 100."
+              },
+              {
+                "name": "semester",
+                "value": "202008|leq",
+                "type": "query",
+                "description": "6-digit semester ID to search, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              },
+              {
+                "name": "credits",
+                "value": "3|leq",
+                "type": "query",
+                "description": "The number of credits to watch, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              },
+              {
+                "name": "dept_id",
+                "value": "CMSC",
+                "type": "query",
+                "description": "4 Letter department code to search."
+              },
+              {
+                "name": "gen_ed",
+                "value": "DSNS",
+                "type": "query",
+                "description": "Gened requirement to search."
+              }
+            ]
+          },
+          "docs": "Returns paginated list of courses"
+        },
+        {
+          "info": {
+            "name": "List of minified courses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses/list",
+            "params": [
+              {
+                "name": "sort",
+                "value": "course_id,-credits",
+                "type": "query",
+                "description": "a comma-separated list of course properties. Defaults to ASCENDING order, use a - (minus) prefix for DESCENDING order. For example, ?sort=course_id,-credits sorts the results ASCENDING by course_id and DESCENDING by credits."
+              },
+              {
+                "name": "page",
+                "value": "3",
+                "type": "query",
+                "description": "For paginated responses, the page to view. 1-indexed. Defaults to 1 if omitted."
+              },
+              {
+                "name": "per_page",
+                "value": "3",
+                "type": "query",
+                "description": "Endpoints that return a large amount of items are paginated to 30 items by default. You can use this parameter to set a page size up to 100."
+              },
+              {
+                "name": "semester",
+                "value": "202008|leq",
+                "type": "query",
+                "description": "6-digit semester ID to search, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              }
+            ]
+          },
+          "docs": "Returns list of all course codes and names"
+        },
+        {
+          "info": {
+            "name": "List of sections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses/sections",
+            "params": [
+              {
+                "name": "sort",
+                "value": "course_id,-credits",
+                "type": "query",
+                "description": "a comma-separated list of course properties. Defaults to ASCENDING order, use a - (minus) prefix for DESCENDING order. For example, ?sort=course_id,-credits sorts the results ASCENDING by course_id and DESCENDING by credits."
+              },
+              {
+                "name": "page",
+                "value": "3",
+                "type": "query",
+                "description": "For paginated responses, the page to view. 1-indexed. Defaults to 1 if omitted."
+              },
+              {
+                "name": "per_page",
+                "value": "3",
+                "type": "query",
+                "description": "Endpoints that return a large amount of items are paginated to 30 items by default. You can use this parameter to set a page size up to 100."
+              },
+              {
+                "name": "course_id",
+                "value": "CMSC216",
+                "type": "query",
+                "description": "7 or 8 digit course id. See the course object for more info."
+              },
+              {
+                "name": "seats",
+                "value": "200",
+                "type": "query",
+                "description": "Number of total seats in a section, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              },
+              {
+                "name": "open_seats",
+                "value": "5",
+                "type": "query",
+                "description": "Number of open seats in a section, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              },
+              {
+                "name": "waitlist",
+                "value": "10",
+                "type": "query",
+                "description": "Number of people on the waitlist for a class, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              },
+              {
+                "name": "semester",
+                "value": "202008|leq",
+                "type": "query",
+                "description": "6-digit semester ID to search, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              }
+            ]
+          },
+          "docs": "Returns paginated list of sections"
+        },
+        {
+          "info": {
+            "name": "View specific sections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses/sections/:section_ids",
+            "params": [
+              {
+                "name": "section_ids",
+                "value": "ENGL101-0101,MATH140-0201",
+                "type": "path"
+              },
+              {
+                "name": "semester",
+                "value": "202008|leq",
+                "type": "query",
+                "description": "6-digit semester ID to search, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              }
+            ]
+          },
+          "docs": "Returns paginated list of sections"
+        },
+        {
+          "info": {
+            "name": "View specific courses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses/:course_ids",
+            "params": [
+              {
+                "name": "course_ids",
+                "value": "ENGL101,MATH140,CMSC388F",
+                "type": "path"
+              },
+              {
+                "name": "semester",
+                "value": "202008|leq",
+                "type": "query",
+                "description": "6-digit semester ID to search, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              }
+            ]
+          },
+          "docs": "Returns info about one or more courses"
+        },
+        {
+          "info": {
+            "name": "View sections for a course",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses/:course_ids/sections",
+            "params": [
+              {
+                "name": "course_ids",
+                "value": "ENGL101,MATH140,CMSC388F",
+                "type": "path"
+              },
+              {
+                "name": "semester",
+                "value": "202008|leq",
+                "type": "query",
+                "description": "6-digit semester ID to search, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              }
+            ]
+          },
+          "docs": "Returns info about one or more courses"
+        },
+        {
+          "info": {
+            "name": "View specific sections for a course",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses/:course_ids/sections/:section_ids",
+            "params": [
+              {
+                "name": "course_ids",
+                "value": "ENGL101,MATH140,CMSC388F",
+                "type": "path"
+              },
+              {
+                "name": "section_ids",
+                "value": "ENGL101-0101,MATH140-0201",
+                "type": "path"
+              },
+              {
+                "name": "semester",
+                "value": "202008|leq",
+                "type": "query",
+                "description": "6-digit semester ID to search, with optional comparator, separated by a pipe. Valid comparators are eq, leq, lt, gt, geq, neq."
+              }
+            ]
+          },
+          "docs": "Returns info about one or more courses"
+        },
+        {
+          "info": {
+            "name": "List semesters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses/semesters"
+          },
+          "docs": "Returns list of all available semesters, each in format YYYYMM"
+        },
+        {
+          "info": {
+            "name": "List departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/courses/departments"
+          },
+          "docs": "Returns list of all available departments"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

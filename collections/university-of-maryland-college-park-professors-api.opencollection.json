@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "umd.io bus professors API",
+    "version": "1.0.0 Beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "professors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List professors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.umd.io/v1/professors",
+            "params": [
+              {
+                "name": "name",
+                "value": "Aaron Bartlett",
+                "type": "query",
+                "description": "Professor's name."
+              },
+              {
+                "name": "course_id",
+                "value": "CMSC216",
+                "type": "query",
+                "description": "7 or 8 digit course id. See the course object for more info."
+              }
+            ]
+          },
+          "docs": "Returns list of all professors"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

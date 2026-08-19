@@ -1,0 +1,284 @@
+{
+  "item": [
+    {
+      "id": "1abb4cc3-87d2-4223-ae9b-e50fbc57352c",
+      "name": "map",
+      "description": {
+        "content": "Data about things on campus, such as buildings, dining halls, and other facilities.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bf48ecc0-351c-4cce-97b2-506655f81f0f",
+          "name": "List buildings",
+          "request": {
+            "name": "List buildings",
+            "description": {
+              "content": "Get a list of the available buildings.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "map",
+                "buildings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af0335f4-4d8d-4903-befa-161c83793ed1",
+              "name": "Successful Operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "map",
+                    "buildings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"name\": \"Edward St. John Learning and Teaching Center\",\n    \"code\": \"ESJ\",\n    \"id\": \"226\",\n    \"long\": -76.941914,\n    \"lat\": 38.986699\n  },\n  {\n    \"name\": \"Edward St. John Learning and Teaching Center\",\n    \"code\": \"ESJ\",\n    \"id\": \"226\",\n    \"long\": -76.941914,\n    \"lat\": 38.986699\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce0ddaa9-16c1-4ab1-8760-d61b4f104b79",
+          "name": "Get buildings",
+          "request": {
+            "name": "Get buildings",
+            "description": {
+              "content": "Get location data about one or more buildings. Comma separated building numbers are the parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "map",
+                "buildings",
+                ":building_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>,<string>",
+                  "key": "building_id",
+                  "description": "(Required) Numeric building ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8529daf6-e3d6-4529-9c73-60f4e6447f90",
+              "name": "Successful Operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "map",
+                    "buildings",
+                    ":building_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>,<string>",
+                      "key": "building_id",
+                      "description": "(Required) Numeric building ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"name\": \"Edward St. John Learning and Teaching Center\",\n    \"code\": \"ESJ\",\n    \"id\": \"226\",\n    \"long\": -76.941914,\n    \"lat\": 38.986699\n  },\n  \"count\": 1\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bf699dc-00b4-4e91-8127-81e462ee88f6",
+              "name": "Malformed building code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "map",
+                    "buildings",
+                    ":building_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>,<string>",
+                      "key": "building_id",
+                      "description": "(Required) Numeric building ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 225.39924436070004,\n  \"message\": \"string\",\n  \"docs\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7da2893-e0e7-4de9-919c-5f8888df64ed",
+              "name": "Unknown building code",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "map",
+                    "buildings",
+                    ":building_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>,<string>",
+                      "key": "building_id",
+                      "description": "(Required) Numeric building ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 225.39924436070004,\n  \"message\": \"string\",\n  \"docs\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.umd.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7ce8e71d-ca72-4176-8731-781802ec67e0",
+    "name": "umd.io bus map API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to umd.io, the open-source API for University of Maryland data. If you are building a University data-focused app, hack, or project, you’re in the right place. This site will walk you through basic API use and document all supported API calls.\n\numd.io is a GETful API. It follows RESTful conventions, but for now, you can only get data – you can’t create, update, or destroy.\n\nWe're now in version 1! We might add new endpoints or more data to existing responses, but we won't remove anything without a major version change.\n\nIf you're looking for the v0 docs, you can find them at https://docs.umd.io/. Please note that v0 is deprecated. It will continue to be supported until at least 2021, but will get no further feature updates, and will eventually be discontinued.\n\nWe are actively looking for contributors! Tweet, email, or otherwise get in touch with us.\n\nContact Support:\n Email: hi@umd.io",
+      "type": "text/plain"
+    }
+  }
+}

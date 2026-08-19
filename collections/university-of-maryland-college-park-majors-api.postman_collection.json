@@ -1,0 +1,104 @@
+{
+  "item": [
+    {
+      "id": "8ec5d20d-f404-45c4-bc84-efd284f35b94",
+      "name": "majors",
+      "description": {
+        "content": "Data about the various majors offered on campus.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d155dde7-0e77-4e90-bec7-76980e35d661",
+          "name": "List majors",
+          "request": {
+            "name": "List majors",
+            "description": {
+              "content": "Get a list of all majors",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "majors",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "703666f3-2a18-4748-addd-c5fe4244def7",
+              "name": "Successful Operation",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "majors",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"major_id\": 19,\n    \"name\": \"Behavioral and Community Health\",\n    \"college\": \"School of Public Health\",\n    \"url\": \"http://sph.umd.edu/department/bch/\"\n  },\n  {\n    \"major_id\": 19,\n    \"name\": \"Behavioral and Community Health\",\n    \"college\": \"School of Public Health\",\n    \"url\": \"http://sph.umd.edu/department/bch/\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.umd.io/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6c45eb62-4b55-43c8-92e3-d5f1cb0c5824",
+    "name": "umd.io bus majors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Welcome to umd.io, the open-source API for University of Maryland data. If you are building a University data-focused app, hack, or project, you’re in the right place. This site will walk you through basic API use and document all supported API calls.\n\numd.io is a GETful API. It follows RESTful conventions, but for now, you can only get data – you can’t create, update, or destroy.\n\nWe're now in version 1! We might add new endpoints or more data to existing responses, but we won't remove anything without a major version change.\n\nIf you're looking for the v0 docs, you can find them at https://docs.umd.io/. Please note that v0 is deprecated. It will continue to be supported until at least 2021, but will get no further feature updates, and will eventually be discontinued.\n\nWe are actively looking for contributors! Tweet, email, or otherwise get in touch with us.\n\nContact Support:\n Email: hi@umd.io",
+      "type": "text/plain"
+    }
+  }
+}
