@@ -39,7 +39,7 @@ tags:
   - Student Run
 created: '2026-06-03'
 modified: '2026-06-03'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: university-of-maryland-college-park:testudo-soc
   name: Testudo Schedule of Classes
