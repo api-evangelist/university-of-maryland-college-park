@@ -82,6 +82,8 @@ apis:
   humanURL: https://beta.umd.io
   baseURL: https://api.umd.io/v1
   tags:
+  - Bus
+  tags_raw:
   - bus
   properties:
   - type: OpenAPI
@@ -105,6 +107,8 @@ apis:
   humanURL: https://beta.umd.io
   baseURL: https://api.umd.io/v1
   tags:
+  - Courses
+  tags_raw:
   - courses
   properties:
   - type: OpenAPI
@@ -145,6 +149,8 @@ apis:
   humanURL: https://beta.umd.io
   baseURL: https://api.umd.io/v1
   tags:
+  - Map
+  tags_raw:
   - map
   properties:
   - type: OpenAPI
