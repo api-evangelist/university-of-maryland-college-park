@@ -199,6 +199,9 @@ apis:
   - type: JSONLD
     url: json-ld/university-of-maryland-college-park-context.jsonld
 common:
+  - type: CapabilityMap
+    url: capabilities/university-of-maryland-college-park-capability-edges.yml
+    name: University of Maryland College Park Business Capability Map
   - type: AgenticAccess
     url: agentic-access/university-of-maryland-college-park-agentic-access.yml
   - type: DomainSecurity
