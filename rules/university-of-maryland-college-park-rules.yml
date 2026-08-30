@@ -1,71 +1,131 @@
-formats: [oas3]
+# generated: '2026-08-30'
+# method: derived
+# source: openapi/university-of-maryland-college-park-libraries-website-tools-openapi.yml
+# x-operator: institution
+#
+# Spectral ruleset for the University of Maryland's one institution-operated OpenAPI, the
+# UMD Libraries Website Tools API. Every rule below was written against a defect actually
+# present in, or a convention actually held by, that contract as harvested on 2026-08-30.
+# Built-in Spectral functions only.
 rules:
-  umd-info-contact:
-    description: API info should include a contact email (umd.io publishes hi@umd.io).
+  umd-info-title-not-framework-default:
+    description: >-
+      info.title must name the service. The harvested contract carries the FastAPI default
+      "FastAPI", which makes the document unattributable once it leaves its host.
+    message: '{{description}}'
+    severity: error
+    given: $.info
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        notMatch: '^(FastAPI|Swagger|API|OpenAPI)$'
+
+  umd-info-version-moved-off-default:
+    description: >-
+      info.version must not remain the framework default 0.1.0. UMD's contract has never
+      bumped it, so consumers cannot tell one deployment from another.
+    message: '{{description}}'
     severity: warn
-    formats: [oas3]
+    given: $.info
+    then:
+      field: version
+      function: pattern
+      functionOptions:
+        notMatch: '^0\.1\.0$'
+
+  umd-servers-absolute:
+    description: >-
+      servers[].url must be absolute. The harvested contract declares the relative
+      "/api/libtools", which is only resolvable if you already know the host.
+    message: '{{description}}'
+    severity: error
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  umd-info-contact-present:
+    description: >-
+      info.contact must be present. UMD Libraries publish a contact page on their Open Data
+      site; the contract does not point at it.
+    message: '{{description}}'
+    severity: error
     given: $.info
     then:
       field: contact
       function: truthy
 
-  umd-info-license:
-    description: API info should declare a license (umd.io is MIT licensed).
-    severity: warn
-    formats: [oas3]
-    given: $.info
+  umd-operation-has-summary:
+    description: Every operation needs a human summary; the harvested summaries were method names.
+    message: '{{description}}'
+    severity: error
+    given: $.paths[*][*]
     then:
-      field: license
+      field: summary
       function: truthy
 
-  umd-server-is-umd-io:
-    description: Servers should point at the official api.umd.io host.
-    severity: error
-    formats: [oas3]
-    given: $.servers[*].url
-    then:
-      function: pattern
-      functionOptions:
-        match: "^https://api\\.umd\\.io"
-
-  umd-operation-has-operationid:
-    description: Every operation should have an operationId (umd.io names each one).
-    severity: error
-    formats: [oas3]
-    given: $.paths[*][get]
-    then:
-      field: operationId
-      function: truthy
-
-  umd-get-only:
-    description: umd.io is a read-only (GETful) API; only GET operations are expected.
+  umd-operation-has-description:
+    description: Every operation needs a description beyond its summary.
+    message: '{{description}}'
     severity: warn
-    formats: [oas3]
-    given: $.paths[*]
+    given: $.paths[*][*]
     then:
-      field: get
+      field: description
       function: truthy
 
   umd-operation-tagged:
-    description: Operations should be tagged with one of the known umd.io domains.
-    severity: warn
-    formats: [oas3]
-    given: $.paths[*][get].tags[*]
+    description: Every operation must carry at least one tag; the harvested contract declared none.
+    message: '{{description}}'
+    severity: error
+    given: $.paths[*][*]
     then:
-      function: enumeration
+      field: tags
+      function: length
       functionOptions:
-        values:
-          - courses
-          - professors
-          - bus
-          - map
-          - majors
+        min: 1
 
-  umd-error-schema-present:
-    description: Error responses should reference the shared Error schema.
-    severity: warn
-    formats: [oas3]
-    given: $.paths[*][get].responses[?(@property=='400' || @property=='404')].content.application/json.schema
+  umd-success-response-typed:
+    description: >-
+      A 200 must declare a schema. Eleven of the thirteen harvested operations return an
+      untyped empty schema, so nothing about the payload is contractual.
+    message: '{{description}}'
+    severity: error
+    given: $.paths[*][*].responses['200'].content['application/json']
     then:
-      field: $ref
+      field: schema
+      function: truthy
+
+  umd-not-found-declared:
+    description: >-
+      404 must be declared. The service returns {"detail":"Not Found"} for any unknown path
+      and the harvested contract never says so.
+    message: '{{description}}'
+    severity: warn
+    given: $.paths[*][*].responses
+    then:
+      field: '404'
+      function: truthy
+
+  umd-parameter-described:
+    description: >-
+      Every parameter needs a description. The availability parameter is undocumented, and an
+      empty value returns 500 rather than the declared 422.
+    message: '{{description}}'
+    severity: warn
+    given: $.paths[*][*].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  umd-external-docs-present:
+    description: >-
+      The contract should point at the Open Data service page that documents it.
+    message: '{{description}}'
+    severity: warn
+    given: $
+    then:
+      field: externalDocs
       function: truthy
