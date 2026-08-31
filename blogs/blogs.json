@@ -6,8 +6,15 @@
       "feed_url": "https://today.umd.edu/rss",
       "saved": 0,
       "error": "no_feed_no_posts"
+    },
+    {
+      "source": "https://opendata.lib.umd.edu/contact/",
+      "feed_url": "https://opendata.lib.umd.edu/contact/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-08-22T20:20:02Z",
+  "fetched": "2026-08-30T22:33:40Z",
   "post_count": 10
 }

@@ -2,226 +2,649 @@
 aid: university-of-maryland-college-park
 name: University of Maryland College Park
 description: >-
-  The University of Maryland, College Park (UMD) is the flagship public research
-  university of the University System of Maryland, located in College Park,
-  Maryland, United States. It is ranked #218 in the QS World University Rankings
-  2025. UMD does not operate a central, officially branded public developer
-  portal. The most prominent public, documented programmatic access to UMD data
-  is umd.io, a student-run open-source REST API (api.umd.io) covering courses,
-  course sections, professors, campus bus routes, building/map data, and majors.
-  The Office of the Registrar's Testudo Schedule of Classes provides course data
-  via a public web interface, and the libraries' DRUM (DSpace) institutional
-  repository is publicly accessible.
+  The University of Maryland, College Park (UMD) is the flagship public research university of the
+  University System of Maryland and the state's original 1862 land-grant institution. UMD operates no
+  central developer portal and publishes no university-wide API programme. Its entire confirmed
+  programmable footprint is run by three offices. UMD Libraries publish an Open Data site at
+  opendata.lib.umd.edu documenting the interfaces they operate: a keyless FastAPI service for library
+  hours and bookable-space availability, three live OAI-PMH 2.0 endpoints over digital collections,
+  audio/video collections and ArchivesSpace finding aids, an OpenSearch descriptor over the Avalon A/V
+  catalog, and IIIF Image and Presentation servers. The Division of IT operates the university's
+  Shibboleth identity provider, which publishes SAML 2.0 metadata as InCommon entity
+  urn:mace:incommon:umd.edu with the Research and Scholarship category and SIRTFI assurance — the most
+  consequential machine-readable contract UMD runs, and one no vendor catalogues. The campus GIS office
+  runs an ArcGIS Enterprise 12.1 deployment at gis.umd.edu whose REST service catalog, server info and
+  portal endpoints answer keyless JSON while the fourteen service folders beneath them require a token —
+  the machine-readable backend of the official campus map, and undocumented outside the map itself.
+  Everything else that
+  looks like a UMD API is somebody else's engineering. umd.io, the widely cited course, bus and
+  campus-map API, is a student-run independent project on a NameCheap-registered .io domain hosted at
+  DigitalOcean that states plainly it is not the school; the library discovery layer is Ex Libris Primo
+  through the USMAI consortium; the LMS is Instructure Canvas; web archiving is Archive-It; the
+  open-data repository referral is Dryad. Those are recorded here as tenant relationships, not as UMD's
+  contracts. The DRUM institutional repository is genuinely UMD-operated and was serving a maintenance
+  page across every one of its hosts throughout this review.
+x-type: university
+x-category: Public Research University
 type: Index
 deliveryModel:
-  model: saas
-  open_source: false
-  commercial: true
+  model: self-hosted
+  open_source: true
+  commercial: false
   callable_host: true
-  label: Hosted service · you call their endpoint
+  label: Institution-operated services · open source on GitHub
   confidence: high
   source:
   - openapi
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  - https://github.com/umd-lib
+  - https://opendata.lib.umd.edu/
+  generated: '2026-08-30'
+  method: probed
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: none
   trial: false
-  try_now: false
-  public: false
-  label: Free
-  confidence: medium
+  try_now: true
+  public: true
+  label: Free; library and repository reads keyless, campus GIS services token-gated
+  confidence: high
   source:
-  - plans
-  generated: '2026-07-22'
-  method: derived
-position: Consumer
-access: 3rd-Party
+  - authentication
+  generated: '2026-08-30'
+  method: probed
+position: Provider
+access: Public
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/university-of-maryland-college-park.png
 url: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
-  - University
-  - United States
-  - Open Data
-  - Courses
-  - Student Run
+- University
+- Higher Education
+- Education
+- United States
+- Maryland
+- Public Research University
+- Land Grant
+- Big Ten
+- Library
+- Research Data
+- Digital Collections
+- Identity Federation
+- OAI-PMH
+- Open Data
+- Geospatial
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
-- aid: university-of-maryland-college-park:testudo-soc
-  name: Testudo Schedule of Classes
+- aid: university-of-maryland-college-park:libraries-website-tools
+  name: UMD Libraries Website Tools API
   description: >-
-    The University of Maryland Office of the Registrar's Testudo Schedule of Classes (SOC) is a public
-    web application for browsing course offerings by semester and department. It is a web interface rather
-    than a documented JSON API; the umd.io project scrapes it as a data source.
-  humanURL: https://app.testudo.umd.edu/soc/
+    API middleware operated by the University of Maryland Libraries that exposes today's open/closed
+    status, current bookable-space availability, and raw LibCal space records for five UMD library
+    locations. Thirteen GET operations, no API key, OpenAPI 3.1.0 served from the service itself. The
+    upstream contract is framework-generated: its title is the FastAPI default and its server URL is
+    relative, both repaired in the refined copy with the pristine original kept alongside.
+  humanURL: https://opendata.lib.umd.edu/services/library-website-tools/
+  baseURL: https://api.www.lib.umd.edu/api/libtools
+  x-operator: institution
+  x-operator-evidence: >-
+    Host api.www.lib.umd.edu is under umd.edu; the service is UMD Libraries' own open-source
+    website-libtools application and is documented on the Libraries' own Open Data site.
   tags:
-  - Courses
-  - Registrar
-  - Schedule
+  - Library
+  - Campus Life
+  - Room Booking
+  - Hours
   properties:
+  - type: OpenAPI
+    url: openapi/university-of-maryland-college-park-libraries-website-tools-openapi.yml
+  - type: OpenAPI
+    url: https://api.www.lib.umd.edu/api/libtools/openapi.json
   - type: Documentation
-    url: https://www.testudo.umd.edu/
-- aid: university-of-maryland-college-park:drum
-  name: DRUM Institutional Repository
+    url: https://opendata.lib.umd.edu/services/library-website-tools/
+  - type: InteractiveDocumentation
+    url: https://api.www.lib.umd.edu/api/libtools/docs
+  - type: GitHub
+    url: https://github.com/umd-lib/website-libtools
+  - type: Rules
+    url: rules/university-of-maryland-college-park-rules.yml
+- aid: university-of-maryland-college-park:digital-collections-oai
+  name: UMD Libraries Digital Collections OAI-PMH
   description: >-
-    DRUM (Digital Repository at the University of Maryland) is the UMD Libraries' DSpace-based institutional
-    repository of scholarship and research outputs. It is publicly browsable; programmatic access via
-    OAI-PMH or the DSpace REST API may exist but was not confirmed at the standard endpoint paths during
-    review.
-  humanURL: https://drum.lib.umd.edu
+    OAI-PMH 2.0 harvesting endpoint over UMD Libraries' Fedora-backed digital collections. Identify
+    reports repositoryName "UMD Libraries" and adminEmail lib-ssdr@umd.edu, with records back to 2014.
+    ListSets returns named collections including Diamondback Photos, UMD Student Newspapers and the
+    Gordon W. Prange collection. Keyless.
+  humanURL: https://opendata.lib.umd.edu/services/digital-collections/
+  baseURL: https://api.fcrepo.lib.umd.edu/oai/api
+  x-operator: institution
+  x-operator-evidence: >-
+    Host under umd.edu; Identify names UMD Libraries as the repository and a umd.edu administrative
+    contact; the Fedora stack is UMD Libraries' own umd-fcrepo-* code.
   tags:
-  - Repository
-  - DSpace
-  - Research
+  - Digital Collections
+  - OAI-PMH
+  - Metadata Harvesting
   - Library
   properties:
   - type: Documentation
-    url: https://drum.lib.umd.edu
-- aid: university-of-maryland-college-park:university-of-maryland-college-park-bus-api
-  name: University of Maryland College Park bus API
-  description: >-
-    This endpoint lets you get data about bus routes, schedules, stops, locations, and predicted arrival
-    times. The data is provided by NextBus, which monitors buses and gives the data to us via their API.
-    We think our API is easier to use, but our data might be behind NextBus by a few seconds. If your
-    app requires to-the-second bus location info, you can go right to the source. All bus data is copyright
-    University of Maryland
-  humanURL: https://beta.umd.io
-  baseURL: https://api.umd.io/v1
-  tags:
-  - Bus
-  tags_raw:
-  - bus
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-maryland-college-park-bus-api-openapi.yml
-  - type: Documentation
-    url: https://beta.umd.io
-  - type: GitHub
-    url: https://github.com/umdio/umdio
-  - type: Rules
-    url: rules/university-of-maryland-college-park-rules.yml
-  - type: Vocabulary
-    url: vocabulary/university-of-maryland-college-park-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/university-of-maryland-college-park-context.jsonld
-- aid: university-of-maryland-college-park:university-of-maryland-college-park-courses-api
-  name: University of Maryland College Park courses API
-  description: >-
-    This set of endpoints lets you get data about university courses and their sections. You can get one
-    course or section at a time, several courses or sections at a time, or a list of all the courses.
-    All the data is scraped from Testudo.
-  humanURL: https://beta.umd.io
-  baseURL: https://api.umd.io/v1
-  tags:
-  - Courses
-  tags_raw:
-  - courses
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-maryland-college-park-courses-api-openapi.yml
-  - type: Documentation
-    url: https://beta.umd.io
-  - type: GitHub
-    url: https://github.com/umdio/umdio
-  - type: Rules
-    url: rules/university-of-maryland-college-park-rules.yml
-  - type: Vocabulary
-    url: vocabulary/university-of-maryland-college-park-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/university-of-maryland-college-park-context.jsonld
-- aid: university-of-maryland-college-park:university-of-maryland-college-park-majors-api
-  name: University of Maryland College Park majors API
-  description: Data about the various majors offered on campus.
-  humanURL: https://beta.umd.io
-  baseURL: https://api.umd.io/v1
-  tags:
-  - majors
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-maryland-college-park-majors-api-openapi.yml
-  - type: Documentation
-    url: https://beta.umd.io
-  - type: GitHub
-    url: https://github.com/umdio/umdio
-  - type: Rules
-    url: rules/university-of-maryland-college-park-rules.yml
-  - type: Vocabulary
-    url: vocabulary/university-of-maryland-college-park-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/university-of-maryland-college-park-context.jsonld
-- aid: university-of-maryland-college-park:university-of-maryland-college-park-map-api
-  name: University of Maryland College Park map API
-  description: Data about things on campus, such as buildings, dining halls, and other facilities.
-  humanURL: https://beta.umd.io
-  baseURL: https://api.umd.io/v1
-  tags:
-  - Map
-  tags_raw:
-  - map
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-maryland-college-park-map-api-openapi.yml
-  - type: Documentation
-    url: https://beta.umd.io
-  - type: GitHub
-    url: https://github.com/umdio/umdio
-  - type: Rules
-    url: rules/university-of-maryland-college-park-rules.yml
-  - type: Vocabulary
-    url: vocabulary/university-of-maryland-college-park-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/university-of-maryland-college-park-context.jsonld
-- aid: university-of-maryland-college-park:university-of-maryland-college-park-professors-api
-  name: University of Maryland College Park professors API
-  description: >-
-    This endpoint contains information about university professors and the courses they have taught.
-  humanURL: https://beta.umd.io
-  baseURL: https://api.umd.io/v1
-  tags:
-  - professors
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-maryland-college-park-professors-api-openapi.yml
-  - type: Documentation
-    url: https://beta.umd.io
-  - type: GitHub
-    url: https://github.com/umdio/umdio
-  - type: Rules
-    url: rules/university-of-maryland-college-park-rules.yml
-  - type: Vocabulary
-    url: vocabulary/university-of-maryland-college-park-vocabulary.yml
-  - type: JSONLD
-    url: json-ld/university-of-maryland-college-park-context.jsonld
-common:
-  - type: CapabilityMap
-    url: capabilities/university-of-maryland-college-park-capability-edges.yml
-    name: University of Maryland College Park Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/university-of-maryland-college-park-agentic-access.yml
-  - type: DomainSecurity
-    url: security/university-of-maryland-college-park-domain-security.yml
+    url: https://opendata.lib.umd.edu/services/digital-collections/
+  - type: APIReference
+    url: https://api.fcrepo.lib.umd.edu/oai/api?verb=Identify
   - type: Website
-    url: https://www.umd.edu
+    url: https://digital.lib.umd.edu
   - type: GitHub
-    url: https://github.com/umdio
-  - type: LinkedIn
-    url: https://www.linkedin.com/school/university-of-maryland/
-  - type: Plans
-    url: plans/university-of-maryland-college-park-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/university-of-maryland-college-park-rate-limits.yml
-  - type: FinOps
-    url: finops/university-of-maryland-college-park-finops.yml
-  - type: Review
-    url: review.yml
-  - url: https://today.umd.edu/rss
-    type: Blog
+    url: https://github.com/umd-lib/umd-fcrepo-solr
+- aid: university-of-maryland-college-park:av-collections-oai
+  name: UMD Libraries Audio/Video Collections OAI-PMH and OpenSearch
+  description: >-
+    The Libraries' Avalon Media System deployment for audio and video collections, with an OAI-PMH 2.0
+    endpoint (repositoryName "UMD Libraries", adminEmail lib-dpi@umd.edu), an OpenSearch 1.1 descriptor,
+    and a JSON:API-shaped catalog endpoint returning paginated MediaObject records. All keyless.
+  humanURL: https://opendata.lib.umd.edu/services/digital-collections-av/
+  baseURL: https://api.av.lib.umd.edu/oai/api
+  x-operator: institution
+  x-operator-evidence: >-
+    Hosts under umd.edu; Identify names UMD Libraries and a umd.edu contact. Avalon is community
+    open-source software but this deployment is the institution's.
+  tags:
+  - Digital Collections
+  - Audio Video
+  - OAI-PMH
+  - OpenSearch
+  - Library
+  properties:
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/digital-collections-av/
+  - type: APIReference
+    url: https://api.av.lib.umd.edu/oai/api?verb=Identify
+  - type: OpenSearch
+    url: https://av.lib.umd.edu/catalog/opensearch.xml
+  - type: Website
+    url: https://av.lib.umd.edu/catalog.json
+  - type: GitHub
+    url: https://github.com/umd-lib/avalon
+- aid: university-of-maryland-college-park:archival-collections-oai
+  name: UMD Archival Collections OAI-PMH
+  description: >-
+    OAI-PMH 2.0 endpoint over the Libraries' ArchivesSpace instance, exposing finding aids for Special
+    Collections and the Performing Arts collections. Identify reports adminEmail aspace-oai@umd.edu and
+    a sample identifier of oai:archivesspace//repositories/2/resources/1; ListSets returns the
+    ArchivesSpace record levels class, collection, file, fonds and item. Keyless.
+  humanURL: https://opendata.lib.umd.edu/services/archival-collections/
+  baseURL: https://archives-api.lib.umd.edu/oai
+  x-operator: institution
+  x-operator-evidence: >-
+    Host under umd.edu with a umd.edu administrative contact. ArchivesSpace is community open-source
+    software; the deployment and its data are UMD's.
+  tags:
+  - Archives
+  - Finding Aids
+  - OAI-PMH
+  - Library
+  properties:
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/archival-collections/
+  - type: APIReference
+    url: https://archives-api.lib.umd.edu/oai?verb=Identify
+  - type: Website
+    url: https://archives.lib.umd.edu
+- aid: university-of-maryland-college-park:identity-federation
+  name: UMD Shibboleth Identity Provider — SAML 2.0 Metadata
+  description: >-
+    The university's own Shibboleth identity provider, publishing a SAML 2.0 EntityDescriptor as
+    InCommon entity urn:mace:incommon:umd.edu with scope umd.edu, the InCommon and REFEDS Research and
+    Scholarship entity categories, and REFEDS SIRTFI assurance certification. It is a browser-SSO
+    identity provider for people rather than an authorization server for API clients: it issues no
+    tokens to third parties. It is nonetheless institution-operated by definition, machine-readable,
+    and the single most consequential programmable contract UMD publishes.
+  humanURL: https://login.umd.edu
+  baseURL: https://shib.idm.umd.edu/idp/shibboleth
+  x-operator: institution
+  x-operator-evidence: >-
+    Host under umd.edu; the metadata's own entityID, scope and display name all name the institution.
+  tags:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - InCommon
+  - Single Sign-On
+  properties:
+  - type: APIReference
+    url: https://shib.idm.umd.edu/idp/shibboleth
+  - type: Documentation
+    url: https://login.umd.edu
+  - type: Conformance
+    url: conformance/university-of-maryland-college-park-conformance.yml
+- aid: university-of-maryland-college-park:iiif-services
+  name: UMD Libraries IIIF Services
+  description: >-
+    IIIF Image and Presentation services operated by UMD Libraries — a Cantaloupe 5.0.5 image server and
+    Papaya 1.2.0, the Libraries' own IIIF Presentation API application, behind a shared service index.
+    Keyless. IIIF is not on the Kin Score education regime standards list, but the deployment and the
+    Presentation implementation are the institution's own code.
+  humanURL: https://iiif.lib.umd.edu/
+  baseURL: https://iiif.lib.umd.edu/
+  x-operator: institution
+  x-operator-evidence: >-
+    Host under umd.edu; the manifest server is umd-lib/papaya, written and maintained by UMD Libraries.
+  tags:
+  - IIIF
+  - Digital Collections
+  - Images
+  - Library
+  properties:
+  - type: APIReference
+    url: https://iiif.lib.umd.edu/
+  - type: GitHub
+    url: https://github.com/umd-lib/papaya
+- aid: university-of-maryland-college-park:enterprise-gis
+  name: UMD Enterprise GIS — ArcGIS REST Services
+  description: >-
+    The university's own ArcGIS Enterprise deployment — ArcGIS Server 12.1.0 and Portal 2026.1 at
+    gis.umd.edu — and the machine-readable backend behind the official campus map at maps.umd.edu.
+    The service catalog root, the server info document and the portal REST endpoint all answer
+    keyless JSON; the fourteen service folders beneath them (Navigation, Utilities, UtilityNetworks,
+    InteriorSpace, PlanningAndConstruction, AssetInventories, SnowCommandPortal, DIT, ESSR, OEMBC,
+    POC, Layers, Print, UtilitySystems) return HTTP 200 carrying an ArcGIS error 499 "Token Required",
+    so the catalog is public and the data is not. Esri wrote the software; the deployment, the host
+    and the campus data are UMD's. Not previously catalogued anywhere in this profile.
+  humanURL: https://maps.umd.edu/map/
+  baseURL: https://gis.umd.edu/arcgis/rest/services
+  x-operator: institution
+  x-operator-evidence: >-
+    Host gis.umd.edu is under umd.edu. rest/info reports owningSystemUrl https://gis.umd.edu/portal
+    and soapUrl https://gis.umd.edu/arcgis/services — the server, its portal and its token service are
+    all on the institution's own domain. ArcGIS Enterprise is Esri's software, as ArchivesSpace,
+    Avalon and DSpace are other vendors' software elsewhere in this profile; the deployment is UMD's.
+  x-status:
+    state: gated
+    checked: '2026-08-30'
+    evidence:
+    - url: https://gis.umd.edu/arcgis/rest/services?f=json
+      status: 200
+      note: 14 service folders enumerated, no credential.
+    - url: https://gis.umd.edu/arcgis/rest/services/Navigation?f=json
+      status: 200
+      note: 'Body is {"error":{"code":499,"message":"Token Required"}} — a 200 carrying an error.'
+  tags:
+  - Geospatial
+  - GIS
+  - Campus Map
+  - ArcGIS
+  - Facilities
+  properties:
+  - type: APIReference
+    url: https://gis.umd.edu/arcgis/rest/services?f=json
+  - type: Documentation
+    url: https://gis.umd.edu/arcgis/rest/info?f=json
+  - type: Website
+    url: https://maps.umd.edu/map/
+- aid: university-of-maryland-college-park:drum
+  name: DRUM — Digital Repository at the University of Maryland
+  description: >-
+    UMD Libraries' DSpace 7 institutional repository of UMD scholarship and research data, and the
+    university's DOI-minting surface. UMD Libraries document a DSpace REST API, an OAI-PMH 2.0 endpoint
+    and an OpenSearch endpoint under api.drum.lib.umd.edu. None could be exercised during this review:
+    drum.lib.umd.edu returned 503 with a "Maintenance" page and every api.drum path returned a plain 404.
+    The entry is retained because the repository is genuinely institution-operated and its interfaces are
+    documented on the Libraries' own Open Data site; no conformance is claimed for it.
+  humanURL: https://opendata.lib.umd.edu/services/drum/
+  baseURL: https://api.drum.lib.umd.edu/server
+  x-operator: institution
+  x-operator-evidence: >-
+    Hosts under umd.edu resolving to UMD's own AWS load balancer; the DSpace deployment is umd-lib/DSpace.
+  x-status:
+    state: unavailable
+    checked: '2026-08-30'
+    evidence:
+    - url: https://drum.lib.umd.edu
+      status: 503
+      note: Maintenance page served for the entire host.
+    - url: https://api.drum.lib.umd.edu/server/api
+      status: 404
+    - url: https://api.drum.lib.umd.edu/server/oai/request?verb=Identify
+      status: 404
+  tags:
+  - Research Repository
+  - DSpace
+  - Institutional Repository
+  - OAI-PMH
+  - Library
+  properties:
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/drum/
+  - type: GitHub
+    url: https://github.com/umd-lib/DSpace
+- aid: university-of-maryland-college-park:testudo-soc
+  name: Testudo Schedule of Classes
+  description: >-
+    The Office of the Registrar's public Schedule of Classes, a server-rendered web application for
+    browsing course offerings by term and department. It is the authoritative UMD course surface and it
+    is not an API — there is no JSON representation, no content negotiation and no documented contract.
+    It is recorded as the institution's own course-catalog surface, and as the upstream that umd.io
+    scrapes.
+  humanURL: https://app.testudo.umd.edu/soc/
+  x-operator: institution
+  x-operator-evidence: Host under umd.edu, operated by the UMD Office of the Registrar.
+  x-machine-readable: false
+  tags:
+  - Course Catalog
+  - Registrar
+  - Schedule
+  properties:
+  - type: Website
+    url: https://app.testudo.umd.edu/soc/
+  - type: Documentation
+    url: https://www.testudo.umd.edu/
+- aid: university-of-maryland-college-park:umd-io
+  name: umd.io — student-run University of Maryland data API
+  description: >-
+    A read-only REST API over UMD course, section, professor, campus bus, building/map and major data,
+    covering ground the university itself does not expose programmatically. It is not UMD's. The project
+    states "we aren't the school, and we aren't a corporation" and describes itself as built by students,
+    for students; umd.io is registered through NameCheap with DNS and hosting on DigitalOcean, the
+    contract's contact is hi@umd.io, and the code is MIT-licensed at github.com/umdio. The university
+    neither operates nor endorses it, and its course data is scraped from Testudo rather than supplied.
+    Recorded as a tenant-class relationship: the data described is UMD's, the contract is not. Its
+    OpenAPI and the eleven artifacts derived from it were removed from this repository on 2026-08-30
+    because they were being scored as UMD's engineering.
+  humanURL: https://umd.io
+  baseURL: https://api.umd.io/v1
+  x-operator: tenant
+  x-operator-evidence: >-
+    Registrable domain umd.io is not the institution's; WHOIS shows a NameCheap registration on
+    DigitalOcean nameservers; info.contact is hi@umd.io; the project explicitly disclaims being the
+    university. Not endorsed, so tenant is the ceiling under the university pipeline's operator axis.
+  tags:
+  - Course Catalog
+  - Campus Life
+  - Student Built
+  - Open Source
+  properties:
+  - type: Documentation
+    url: https://beta.umd.io
+  - type: Website
+    url: https://umd.io
+  - type: GitHub
+    url: https://github.com/umdio/umdio
+- aid: university-of-maryland-college-park:umd-discover
+  name: UMD Discover — library discovery layer
+  description: >-
+    UMD's library catalog and discovery layer, delivered as Ex Libris Primo through the University System
+    of Maryland and Affiliated Institutions (USMAI) consortium. The search experience, its APIs and its
+    contract are Ex Libris'; the holdings and the consortium membership are UMD's.
+  humanURL: https://opendata.lib.umd.edu/services/umd-discover/
+  baseURL: https://usmai.primo.exlibrisgroup.com
+  x-operator: tenant
+  x-operator-evidence: >-
+    Host is exlibrisgroup.com, shared across the USMAI consortium. Generic vendor platform; no
+    UMD-specific contract exists to save.
+  tags:
+  - Library Catalog
+  - Discovery
+  - Ex Libris
+  properties:
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/umd-discover/
+  - type: Website
+    url: https://usmai.primo.exlibrisgroup.com
+- aid: university-of-maryland-college-park:archive-it
+  name: UMD Web Archives on Archive-It
+  description: >-
+    UMD Libraries' web archiving programme, operated as Archive-It organization 408 at the Internet
+    Archive. UMD Libraries document Archive-It's OpenSearch interface as an access route to their
+    collections. The collections and the curation are UMD's; the platform, the OpenSearch contract and
+    the infrastructure are the Internet Archive's.
+  humanURL: https://opendata.lib.umd.edu/services/archive-it/
+  baseURL: https://archive-it.org/organizations/408
+  x-operator: tenant
+  x-operator-evidence: Host archive-it.org is the Internet Archive's; organization 408 is UMD's account on it.
+  tags:
+  - Web Archiving
+  - OpenSearch
+  - Library
+  properties:
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/archive-it/
+  - type: Website
+    url: https://archive-it.org/organizations/408
+- aid: university-of-maryland-college-park:internet-archive
+  name: UMD Collection on the Internet Archive
+  description: >-
+    The University of Maryland, College Park collection at the Internet Archive, documented by UMD
+    Libraries as one of their ten Open Data services with archive.org's advancedsearch.php given as
+    the query endpoint and a worked Python example. The collection identifier is
+    university_maryland_cp and it held 10,674 items when probed. The digitised items and the
+    curation are UMD's; the search API, its parameters and its operation are the Internet Archive's.
+    Distinct from the Archive-It web-archiving entry, which is a different UMD Libraries service on
+    the same organisation's infrastructure. The human collection page at
+    archive.org/details/university_maryland_cp is an SPA shell that returns a generic Internet Archive
+    title with no UMD content in the served body, so the machine-readable query is pointed at instead.
+  humanURL: https://opendata.lib.umd.edu/services/internet-archive/
+  baseURL: https://archive.org/advancedsearch.php
+  x-operator: tenant
+  x-operator-evidence: >-
+    Host archive.org is the Internet Archive's and is shared by every contributing institution; UMD
+    is identified inside it only by the collection facet collection:(university_maryland_cp).
+  tags:
+  - Digital Collections
+  - Web Archiving
+  - Search
+  - Library
+  properties:
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/internet-archive/
+  - type: APIReference
+    url: https://archive.org/advancedsearch.php?q=collection%3A%28university_maryland_cp%29&fl%5B%5D=identifier&output=json
+- aid: university-of-maryland-college-park:dryad
+  name: UMD Research Data on Dryad
+  description: >-
+    UMD Libraries refer researchers to Dryad for open research-data deposit and document Dryad's v2 REST
+    API as the access route, scoped to UMD by ROR identifier https://ror.org/047s2c258. The datasets and
+    the institutional membership are UMD's; the API, its OpenAPI and its operation are Dryad's.
+  humanURL: https://opendata.lib.umd.edu/services/dryad/
+  baseURL: https://datadryad.org/api/v2
+  x-operator: tenant
+  x-operator-evidence: >-
+    Host datadryad.org is Dryad's, shared by every member institution. UMD is identified within it only
+    by a ROR query parameter.
+  tags:
+  - Research Data
+  - Repository
+  - ROR
+  properties:
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/dryad/
+  - type: Website
+    url: https://datadryad.org/search?org=https%3A%2F%2Fror.org%2F047s2c258
+- aid: university-of-maryland-college-park:btaa-geoportal
+  name: BTAA Geoportal — UMD geospatial contributions
+  description: >-
+    The Big Ten Academic Alliance Geoportal, a consortium-operated discovery layer for geospatial data
+    to which UMD Libraries contribute records. Operated by the BTAA at geo.btaa.org, not by UMD.
+  humanURL: https://opendata.lib.umd.edu/services/btaa-geoportal/
+  baseURL: https://geo.btaa.org
+  x-operator: tenant
+  x-operator-evidence: Host geo.btaa.org belongs to the Big Ten Academic Alliance consortium.
+  tags:
+  - Geospatial
+  - Consortium
+  - Library
+  properties:
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/btaa-geoportal/
+  - type: Website
+    url: https://geo.btaa.org
+- aid: university-of-maryland-college-park:elms-canvas
+  name: ELMS-Canvas — UMD learning management system
+  description: >-
+    UMD's learning management system, an Instructure Canvas tenancy at umd.instructure.com fronted by
+    elms.umd.edu. Requests to the tenancy redirect to UMD's own Shibboleth identity provider, which is
+    what confirms the tenant relationship. Canvas' REST API and its LTI conformance are Instructure's,
+    not UMD's, and are not creditable to the institution.
+  humanURL: https://elms.umd.edu
+  baseURL: https://umd.instructure.com
+  x-operator: tenant
+  x-operator-evidence: >-
+    umd.instructure.com is an institution-specific subdomain on Instructure's platform; it redirects to
+    shib.idm.umd.edu, UMD's identity provider.
+  tags:
+  - Learning Management
+  - Canvas
+  - LTI
+  properties:
+  - type: Website
+    url: https://elms.umd.edu
+common:
+- type: Website
+  url: https://www.umd.edu
+- type: DeveloperPortal
+  url: https://opendata.lib.umd.edu/
+- type: APIReference
+  url: https://opendata.lib.umd.edu/apis/
+- type: Documentation
+  url: https://opendata.lib.umd.edu/services/
+- type: OpenData
+  url: https://opendata.lib.umd.edu/datasets/
+- type: OpenData
+  url: https://opendata.umd.edu
+- type: LibraryCatalog
+  url: https://opendata.lib.umd.edu/services/umd-discover/
+- type: ResearchRepository
+  url: https://opendata.lib.umd.edu/services/drum/
+- type: CourseCatalog
+  url: https://app.testudo.umd.edu/soc/
+- type: IdentityFederation
+  url: https://shib.idm.umd.edu/idp/shibboleth
+- type: ResearchComputing
+  url: https://hpcc.umd.edu
+- type: AIPolicy
+  url: https://ai.umd.edu/resources-guidelines/guidelines-for-use
+- type: AITooling
+  url: https://terpai.umd.edu
+- type: GitHubOrganization
+  url: https://github.com/umd-lib
+- type: PrivacyPolicy
+  url: https://umd.edu/privacy-notice
+- type: Accessibility
+  url: https://umd.edu/web-accessibility
+- type: Support
+  url: https://opendata.lib.umd.edu/contact/
+- type: Blog
+  url: https://today.umd.edu/rss
+- type: BlogRSS
+  url: https://opendata.lib.umd.edu/index.xml
+- type: LinkedIn
+  url: https://www.linkedin.com/school/university-of-maryland/
+- type: Research
+  url: https://research.umd.edu
+- type: Authentication
+  url: authentication/university-of-maryland-college-park-authentication.yml
+- type: Scopes
+  url: scopes/university-of-maryland-college-park-scopes.yml
+- type: Errors
+  url: errors/university-of-maryland-college-park-errors.yml
+- type: Conformance
+  url: conformance/university-of-maryland-college-park-conformance.yml
+- type: Lifecycle
+  url: lifecycle/university-of-maryland-college-park-lifecycle.yml
+- type: DomainSecurity
+  url: security/university-of-maryland-college-park-domain-security.yml
+- type: Plans
+  url: plans/university-of-maryland-college-park-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/university-of-maryland-college-park-rate-limits.yml
+- type: FinOps
+  url: finops/university-of-maryland-college-park-finops.yml
+- type: Review
+  url: review.yml
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    UMD publishes real institution-operated machine-readable surfaces and they were reached and
+    exercised. Confirmed institution-operated: one OpenAPI 3.1.0 contract (UMD Libraries Website Tools,
+    13 keyless GET operations, harvested and probed), three live OAI-PMH 2.0 endpoints, an OpenSearch
+    1.1 descriptor over the Avalon A/V catalog, IIIF Image and Presentation servers, the university's
+    Shibboleth SAML 2.0 metadata as InCommon urn:mace:incommon:umd.edu, and its own ArcGIS Enterprise
+    12.1 REST catalog at gis.umd.edu. Three education-regime domain standards are evidenced from live
+    protocol responses: oai-pmh, saml and shibboleth. Three limits on this coverage. First, DRUM — UMD's DSpace institutional repository and its DOI surface — served a
+    503 maintenance page on every host for the whole review, so its documented REST, OAI-PMH and
+    OpenSearch endpoints could not be exercised and no datacite or orcid conformance is claimed. Second,
+    the previously catalogued footprint was wrong: the five OpenAPIs and eleven derived artifact sets in
+    this repository described umd.io, an independent student-run project on a non-institution domain
+    that states it is not the university. They were removed and the relationship re-recorded as tenant.
+    Third, the Enterprise GIS is gated: its service catalog enumerates fourteen folders without a
+    credential, but every folder returns an ArcGIS error 499 "Token Required" inside an HTTP 200, so no
+    layer, schema or record behind it could be read and no contract was saved for it.
+  evidence:
+  - url: https://api.www.lib.umd.edu/api/libtools/openapi.json
+    status: 200
+    note: Institution-operated OpenAPI 3.1.0, 13 operations, keyless. Harvested to openapi/_original/.
+  - url: https://api.www.lib.umd.edu/api/libtools/mckeldin/availability
+    status: 200
+    note: Live JSON response, no credential. Captured to examples/.
+  - url: https://api.fcrepo.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+    note: 'OAI-PMH 2.0, repositoryName "UMD Libraries", adminEmail lib-ssdr@umd.edu.'
+  - url: https://api.av.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+    note: 'OAI-PMH 2.0, repositoryName "UMD Libraries", adminEmail lib-dpi@umd.edu.'
+  - url: https://archives-api.lib.umd.edu/oai?verb=Identify
+    status: 200
+    note: 'OAI-PMH 2.0, ArchivesSpace OAI Provider, adminEmail aspace-oai@umd.edu.'
+  - url: https://av.lib.umd.edu/catalog/opensearch.xml
+    status: 200
+    note: OpenSearch 1.1 description document.
+  - url: https://shib.idm.umd.edu/idp/shibboleth
+    status: 200
+    note: 'SAML 2.0 EntityDescriptor, entityID urn:mace:incommon:umd.edu, R&S category, SIRTFI.'
+  - url: https://iiif.lib.umd.edu/images/
+    status: 200
+    note: Cantaloupe 5.0.5 IIIF image server.
+  - url: https://iiif.lib.umd.edu/manifests/
+    status: 200
+    note: Papaya 1.2.0, UMD Libraries' own IIIF Presentation application.
+  - url: https://opendata.lib.umd.edu/
+    status: 200
+    note: UMD Libraries Open Data site — the institution's real developer portal, previously uncatalogued.
+  - url: https://gis.umd.edu/arcgis/rest/services?f=json
+    status: 200
+    note: 'Institution-operated ArcGIS Server 12.1.0; 14 service folders enumerated keyless.'
+  - url: https://gis.umd.edu/portal/sharing/rest?f=json
+    status: 200
+    note: 'ArcGIS Portal 2026.1 on UMD''s own host. Previously uncatalogued.'
+  - url: https://gis.umd.edu/arcgis/rest/services/Navigation?f=json
+    status: 200
+    note: 'HTTP 200 carrying {"error":{"code":499,"message":"Token Required"}} — gated, not dead.'
+  - url: https://archive.org/advancedsearch.php?q=collection:(university_maryland_cp)
+    status: 200
+    note: 'numFound 10,674. Tenth documented UMD Libraries service, previously missing from this profile.'
+  - url: https://opendata.umd.edu
+    status: 200
+    note: 'UMD Data Management and Open Data — university-wide data policy site, distinct from the Libraries''.'
+  - url: https://umd.edu/.well-known/security.txt
+    status: 404
+    note: No security.txt. UMD 404 page returned.
+  - url: https://www.umd.edu/llms.txt
+    status: 404
+    note: No llms.txt on the institutional domain.
+  - url: https://drum.lib.umd.edu
+    status: 503
+    note: Maintenance page for the whole DRUM host throughout the review.
+  - url: https://api.drum.lib.umd.edu/server/api
+    status: 404
+    note: Documented DSpace REST base returned a bare 404 while DRUM was down.
+  - url: https://umd.io
+    status: 200
+    note: 'Student-run project; states "we aren''t the school". Reclassified from institution to tenant.'
+  - url: https://data.umd.edu
+    status: 200
+    note: Not an open-data portal. It is the UMD Data Science undergraduate minor site. Not catalogued.
+  - url: https://status.umd.edu
+    status: 0
+    note: No public status page; TLS handshake fails.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
