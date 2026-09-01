@@ -231,6 +231,11 @@ apis:
   tags:
   - IIIF
   - Digital Collections
+  - Image
+  - Library
+  tags_raw:
+  - IIIF
+  - Digital Collections
   - Images
   - Library
   properties:
@@ -357,6 +362,11 @@ apis:
     DigitalOcean nameservers; info.contact is hi@umd.io; the project explicitly disclaims being the
     university. Not endorsed, so tenant is the ceiling under the university pipeline's operator axis.
   tags:
+  - Course Catalog
+  - Campus Life
+  - Student Built
+  - Open-Source
+  tags_raw:
   - Course Catalog
   - Campus Life
   - Student Built
