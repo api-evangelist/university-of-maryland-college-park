@@ -76,51 +76,19 @@ created: '2026-06-03'
 modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
-- aid: university-of-maryland-college-park:libraries-website-tools
-  name: UMD Libraries Website Tools API
-  description: >-
-    API middleware operated by the University of Maryland Libraries that exposes today's open/closed
-    status, current bookable-space availability, and raw LibCal space records for five UMD library
-    locations. Thirteen GET operations, no API key, OpenAPI 3.1.0 served from the service itself. The
-    upstream contract is framework-generated: its title is the FastAPI default and its server URL is
-    relative, both repaired in the refined copy with the pristine original kept alongside.
-  humanURL: https://opendata.lib.umd.edu/services/library-website-tools/
-  baseURL: https://api.www.lib.umd.edu/api/libtools
-  x-operator: institution
-  x-operator-evidence: >-
-    Host api.www.lib.umd.edu is under umd.edu; the service is UMD Libraries' own open-source
-    website-libtools application and is documented on the Libraries' own Open Data site.
-  tags:
-  - Library
-  - Campus Life
-  - Room Booking
-  - Hours
-  properties:
-  - type: OpenAPI
-    url: openapi/university-of-maryland-college-park-libraries-website-tools-openapi.yml
-  - type: OpenAPI
-    url: https://api.www.lib.umd.edu/api/libtools/openapi.json
-  - type: Documentation
-    url: https://opendata.lib.umd.edu/services/library-website-tools/
-  - type: InteractiveDocumentation
-    url: https://api.www.lib.umd.edu/api/libtools/docs
-  - type: GitHub
-    url: https://github.com/umd-lib/website-libtools
-  - type: Rules
-    url: rules/university-of-maryland-college-park-rules.yml
 - aid: university-of-maryland-college-park:digital-collections-oai
   name: UMD Libraries Digital Collections OAI-PMH
   description: >-
-    OAI-PMH 2.0 harvesting endpoint over UMD Libraries' Fedora-backed digital collections. Identify
-    reports repositoryName "UMD Libraries" and adminEmail lib-ssdr@umd.edu, with records back to 2014.
-    ListSets returns named collections including Diamondback Photos, UMD Student Newspapers and the
-    Gordon W. Prange collection. Keyless.
+    OAI-PMH 2.0 harvesting endpoint over UMD Libraries' Fedora-backed digital collections. Identify reports
+    repositoryName "UMD Libraries" and adminEmail lib-ssdr@umd.edu, with records back to 2014. ListSets
+    returns named collections including Diamondback Photos, UMD Student Newspapers and the Gordon W. Prange
+    collection. Keyless.
   humanURL: https://opendata.lib.umd.edu/services/digital-collections/
   baseURL: https://api.fcrepo.lib.umd.edu/oai/api
   x-operator: institution
   x-operator-evidence: >-
-    Host under umd.edu; Identify names UMD Libraries as the repository and a umd.edu administrative
-    contact; the Fedora stack is UMD Libraries' own umd-fcrepo-* code.
+    Host under umd.edu; Identify names UMD Libraries as the repository and a umd.edu administrative contact;
+    the Fedora stack is UMD Libraries' own umd-fcrepo-* code.
   tags:
   - Digital Collections
   - OAI-PMH
@@ -145,8 +113,8 @@ apis:
   baseURL: https://api.av.lib.umd.edu/oai/api
   x-operator: institution
   x-operator-evidence: >-
-    Hosts under umd.edu; Identify names UMD Libraries and a umd.edu contact. Avalon is community
-    open-source software but this deployment is the institution's.
+    Hosts under umd.edu; Identify names UMD Libraries and a umd.edu contact. Avalon is community open-source
+    software but this deployment is the institution's.
   tags:
   - Digital Collections
   - Audio Video
@@ -169,14 +137,14 @@ apis:
   description: >-
     OAI-PMH 2.0 endpoint over the Libraries' ArchivesSpace instance, exposing finding aids for Special
     Collections and the Performing Arts collections. Identify reports adminEmail aspace-oai@umd.edu and
-    a sample identifier of oai:archivesspace//repositories/2/resources/1; ListSets returns the
-    ArchivesSpace record levels class, collection, file, fonds and item. Keyless.
+    a sample identifier of oai:archivesspace//repositories/2/resources/1; ListSets returns the ArchivesSpace
+    record levels class, collection, file, fonds and item. Keyless.
   humanURL: https://opendata.lib.umd.edu/services/archival-collections/
   baseURL: https://archives-api.lib.umd.edu/oai
   x-operator: institution
   x-operator-evidence: >-
-    Host under umd.edu with a umd.edu administrative contact. ArchivesSpace is community open-source
-    software; the deployment and its data are UMD's.
+    Host under umd.edu with a umd.edu administrative contact. ArchivesSpace is community open-source software;
+    the deployment and its data are UMD's.
   tags:
   - Archives
   - Finding Aids
@@ -192,12 +160,12 @@ apis:
 - aid: university-of-maryland-college-park:identity-federation
   name: UMD Shibboleth Identity Provider — SAML 2.0 Metadata
   description: >-
-    The university's own Shibboleth identity provider, publishing a SAML 2.0 EntityDescriptor as
-    InCommon entity urn:mace:incommon:umd.edu with scope umd.edu, the InCommon and REFEDS Research and
-    Scholarship entity categories, and REFEDS SIRTFI assurance certification. It is a browser-SSO
-    identity provider for people rather than an authorization server for API clients: it issues no
-    tokens to third parties. It is nonetheless institution-operated by definition, machine-readable,
-    and the single most consequential programmable contract UMD publishes.
+    The university's own Shibboleth identity provider, publishing a SAML 2.0 EntityDescriptor as InCommon
+    entity urn:mace:incommon:umd.edu with scope umd.edu, the InCommon and REFEDS Research and Scholarship
+    entity categories, and REFEDS SIRTFI assurance certification. It is a browser-SSO identity provider
+    for people rather than an authorization server for API clients: it issues no tokens to third parties.
+    It is nonetheless institution-operated by definition, machine-readable, and the single most consequential
+    programmable contract UMD publishes.
   humanURL: https://login.umd.edu
   baseURL: https://shib.idm.umd.edu/idp/shibboleth
   x-operator: institution
@@ -246,22 +214,22 @@ apis:
 - aid: university-of-maryland-college-park:enterprise-gis
   name: UMD Enterprise GIS — ArcGIS REST Services
   description: >-
-    The university's own ArcGIS Enterprise deployment — ArcGIS Server 12.1.0 and Portal 2026.1 at
-    gis.umd.edu — and the machine-readable backend behind the official campus map at maps.umd.edu.
-    The service catalog root, the server info document and the portal REST endpoint all answer
-    keyless JSON; the fourteen service folders beneath them (Navigation, Utilities, UtilityNetworks,
-    InteriorSpace, PlanningAndConstruction, AssetInventories, SnowCommandPortal, DIT, ESSR, OEMBC,
-    POC, Layers, Print, UtilitySystems) return HTTP 200 carrying an ArcGIS error 499 "Token Required",
-    so the catalog is public and the data is not. Esri wrote the software; the deployment, the host
-    and the campus data are UMD's. Not previously catalogued anywhere in this profile.
+    The university's own ArcGIS Enterprise deployment — ArcGIS Server 12.1.0 and Portal 2026.1 at gis.umd.edu
+    — and the machine-readable backend behind the official campus map at maps.umd.edu. The service catalog
+    root, the server info document and the portal REST endpoint all answer keyless JSON; the fourteen
+    service folders beneath them (Navigation, Utilities, UtilityNetworks, InteriorSpace, PlanningAndConstruction,
+    AssetInventories, SnowCommandPortal, DIT, ESSR, OEMBC, POC, Layers, Print, UtilitySystems) return
+    HTTP 200 carrying an ArcGIS error 499 "Token Required", so the catalog is public and the data is not.
+    Esri wrote the software; the deployment, the host and the campus data are UMD's. Not previously catalogued
+    anywhere in this profile.
   humanURL: https://maps.umd.edu/map/
   baseURL: https://gis.umd.edu/arcgis/rest/services
   x-operator: institution
   x-operator-evidence: >-
-    Host gis.umd.edu is under umd.edu. rest/info reports owningSystemUrl https://gis.umd.edu/portal
-    and soapUrl https://gis.umd.edu/arcgis/services — the server, its portal and its token service are
-    all on the institution's own domain. ArcGIS Enterprise is Esri's software, as ArchivesSpace,
-    Avalon and DSpace are other vendors' software elsewhere in this profile; the deployment is UMD's.
+    Host gis.umd.edu is under umd.edu. rest/info reports owningSystemUrl https://gis.umd.edu/portal and
+    soapUrl https://gis.umd.edu/arcgis/services — the server, its portal and its token service are all
+    on the institution's own domain. ArcGIS Enterprise is Esri's software, as ArchivesSpace, Avalon and
+    DSpace are other vendors' software elsewhere in this profile; the deployment is UMD's.
   x-status:
     state: gated
     checked: '2026-08-30'
@@ -271,7 +239,7 @@ apis:
       note: 14 service folders enumerated, no credential.
     - url: https://gis.umd.edu/arcgis/rest/services/Navigation?f=json
       status: 200
-      note: 'Body is {"error":{"code":499,"message":"Token Required"}} — a 200 carrying an error.'
+      note: Body is {"error":{"code":499,"message":"Token Required"}} — a 200 carrying an error.
   tags:
   - Geospatial
   - GIS
@@ -288,12 +256,12 @@ apis:
 - aid: university-of-maryland-college-park:drum
   name: DRUM — Digital Repository at the University of Maryland
   description: >-
-    UMD Libraries' DSpace 7 institutional repository of UMD scholarship and research data, and the
-    university's DOI-minting surface. UMD Libraries document a DSpace REST API, an OAI-PMH 2.0 endpoint
-    and an OpenSearch endpoint under api.drum.lib.umd.edu. None could be exercised during this review:
-    drum.lib.umd.edu returned 503 with a "Maintenance" page and every api.drum path returned a plain 404.
-    The entry is retained because the repository is genuinely institution-operated and its interfaces are
-    documented on the Libraries' own Open Data site; no conformance is claimed for it.
+    UMD Libraries' DSpace 7 institutional repository of UMD scholarship and research data, and the university's
+    DOI-minting surface. UMD Libraries document a DSpace REST API, an OAI-PMH 2.0 endpoint and an OpenSearch
+    endpoint under api.drum.lib.umd.edu. None could be exercised during this review: drum.lib.umd.edu
+    returned 503 with a "Maintenance" page and every api.drum path returned a plain 404. The entry is
+    retained because the repository is genuinely institution-operated and its interfaces are documented
+    on the Libraries' own Open Data site; no conformance is claimed for it.
   humanURL: https://opendata.lib.umd.edu/services/drum/
   baseURL: https://api.drum.lib.umd.edu/server
   x-operator: institution
@@ -324,11 +292,10 @@ apis:
 - aid: university-of-maryland-college-park:testudo-soc
   name: Testudo Schedule of Classes
   description: >-
-    The Office of the Registrar's public Schedule of Classes, a server-rendered web application for
-    browsing course offerings by term and department. It is the authoritative UMD course surface and it
-    is not an API — there is no JSON representation, no content negotiation and no documented contract.
-    It is recorded as the institution's own course-catalog surface, and as the upstream that umd.io
-    scrapes.
+    The Office of the Registrar's public Schedule of Classes, a server-rendered web application for browsing
+    course offerings by term and department. It is the authoritative UMD course surface and it is not
+    an API — there is no JSON representation, no content negotiation and no documented contract. It is
+    recorded as the institution's own course-catalog surface, and as the upstream that umd.io scrapes.
   humanURL: https://app.testudo.umd.edu/soc/
   x-operator: institution
   x-operator-evidence: Host under umd.edu, operated by the UMD Office of the Registrar.
@@ -348,19 +315,19 @@ apis:
     A read-only REST API over UMD course, section, professor, campus bus, building/map and major data,
     covering ground the university itself does not expose programmatically. It is not UMD's. The project
     states "we aren't the school, and we aren't a corporation" and describes itself as built by students,
-    for students; umd.io is registered through NameCheap with DNS and hosting on DigitalOcean, the
-    contract's contact is hi@umd.io, and the code is MIT-licensed at github.com/umdio. The university
-    neither operates nor endorses it, and its course data is scraped from Testudo rather than supplied.
-    Recorded as a tenant-class relationship: the data described is UMD's, the contract is not. Its
-    OpenAPI and the eleven artifacts derived from it were removed from this repository on 2026-08-30
-    because they were being scored as UMD's engineering.
+    for students; umd.io is registered through NameCheap with DNS and hosting on DigitalOcean, the contract's
+    contact is hi@umd.io, and the code is MIT-licensed at github.com/umdio. The university neither operates
+    nor endorses it, and its course data is scraped from Testudo rather than supplied. Recorded as a tenant-class
+    relationship: the data described is UMD's, the contract is not. Its OpenAPI and the eleven artifacts
+    derived from it were removed from this repository on 2026-08-30 because they were being scored as
+    UMD's engineering.
   humanURL: https://umd.io
   baseURL: https://api.umd.io/v1
   x-operator: tenant
   x-operator-evidence: >-
-    Registrable domain umd.io is not the institution's; WHOIS shows a NameCheap registration on
-    DigitalOcean nameservers; info.contact is hi@umd.io; the project explicitly disclaims being the
-    university. Not endorsed, so tenant is the ceiling under the university pipeline's operator axis.
+    Registrable domain umd.io is not the institution's; WHOIS shows a NameCheap registration on DigitalOcean
+    nameservers; info.contact is hi@umd.io; the project explicitly disclaims being the university. Not
+    endorsed, so tenant is the ceiling under the university pipeline's operator axis.
   tags:
   - Course Catalog
   - Campus Life
@@ -388,8 +355,8 @@ apis:
   baseURL: https://usmai.primo.exlibrisgroup.com
   x-operator: tenant
   x-operator-evidence: >-
-    Host is exlibrisgroup.com, shared across the USMAI consortium. Generic vendor platform; no
-    UMD-specific contract exists to save.
+    Host is exlibrisgroup.com, shared across the USMAI consortium. Generic vendor platform; no UMD-specific
+    contract exists to save.
   tags:
   - Library Catalog
   - Discovery
@@ -402,14 +369,15 @@ apis:
 - aid: university-of-maryland-college-park:archive-it
   name: UMD Web Archives on Archive-It
   description: >-
-    UMD Libraries' web archiving programme, operated as Archive-It organization 408 at the Internet
-    Archive. UMD Libraries document Archive-It's OpenSearch interface as an access route to their
-    collections. The collections and the curation are UMD's; the platform, the OpenSearch contract and
-    the infrastructure are the Internet Archive's.
+    UMD Libraries' web archiving programme, operated as Archive-It organization 408 at the Internet Archive.
+    UMD Libraries document Archive-It's OpenSearch interface as an access route to their collections.
+    The collections and the curation are UMD's; the platform, the OpenSearch contract and the infrastructure
+    are the Internet Archive's.
   humanURL: https://opendata.lib.umd.edu/services/archive-it/
   baseURL: https://archive-it.org/organizations/408
   x-operator: tenant
-  x-operator-evidence: Host archive-it.org is the Internet Archive's; organization 408 is UMD's account on it.
+  x-operator-evidence: Host archive-it.org is the Internet Archive's; organization 408 is UMD's account
+    on it.
   tags:
   - Web Archiving
   - OpenSearch
@@ -422,21 +390,21 @@ apis:
 - aid: university-of-maryland-college-park:internet-archive
   name: UMD Collection on the Internet Archive
   description: >-
-    The University of Maryland, College Park collection at the Internet Archive, documented by UMD
-    Libraries as one of their ten Open Data services with archive.org's advancedsearch.php given as
-    the query endpoint and a worked Python example. The collection identifier is
-    university_maryland_cp and it held 10,674 items when probed. The digitised items and the
-    curation are UMD's; the search API, its parameters and its operation are the Internet Archive's.
-    Distinct from the Archive-It web-archiving entry, which is a different UMD Libraries service on
-    the same organisation's infrastructure. The human collection page at
-    archive.org/details/university_maryland_cp is an SPA shell that returns a generic Internet Archive
-    title with no UMD content in the served body, so the machine-readable query is pointed at instead.
+    The University of Maryland, College Park collection at the Internet Archive, documented by UMD Libraries
+    as one of their ten Open Data services with archive.org's advancedsearch.php given as the query endpoint
+    and a worked Python example. The collection identifier is university_maryland_cp and it held 10,674
+    items when probed. The digitised items and the curation are UMD's; the search API, its parameters
+    and its operation are the Internet Archive's. Distinct from the Archive-It web-archiving entry, which
+    is a different UMD Libraries service on the same organisation's infrastructure. The human collection
+    page at archive.org/details/university_maryland_cp is an SPA shell that returns a generic Internet
+    Archive title with no UMD content in the served body, so the machine-readable query is pointed at
+    instead.
   humanURL: https://opendata.lib.umd.edu/services/internet-archive/
   baseURL: https://archive.org/advancedsearch.php
   x-operator: tenant
   x-operator-evidence: >-
-    Host archive.org is the Internet Archive's and is shared by every contributing institution; UMD
-    is identified inside it only by the collection facet collection:(university_maryland_cp).
+    Host archive.org is the Internet Archive's and is shared by every contributing institution; UMD is
+    identified inside it only by the collection facet collection:(university_maryland_cp).
   tags:
   - Digital Collections
   - Web Archiving
@@ -446,7 +414,8 @@ apis:
   - type: Documentation
     url: https://opendata.lib.umd.edu/services/internet-archive/
   - type: APIReference
-    url: https://archive.org/advancedsearch.php?q=collection%3A%28university_maryland_cp%29&fl%5B%5D=identifier&output=json
+    url: >-
+      https://archive.org/advancedsearch.php?q=collection%3A%28university_maryland_cp%29&fl%5B%5D=identifier&output=json
 - aid: university-of-maryland-college-park:dryad
   name: UMD Research Data on Dryad
   description: >-
@@ -506,6 +475,97 @@ apis:
   properties:
   - type: Website
     url: https://elms.umd.edu
+- aid: university-of-maryland-college-park:university-of-maryland-college-park-art-api
+  name: University of Maryland College Park Art API
+  description: The Art API from University of Maryland College Park — 3 operation(s) for art.
+  humanURL: https://opendata.lib.umd.edu/services/library-website-tools/
+  baseURL: https://api.www.lib.umd.edu/api/libtools
+  tags:
+  - Art
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-maryland-college-park-art-api-openapi.yml
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/library-website-tools/
+  - type: InteractiveDocumentation
+    url: https://api.www.lib.umd.edu/api/libtools/docs
+  - type: GitHub
+    url: https://github.com/umd-lib/website-libtools
+  - type: Rules
+    url: rules/university-of-maryland-college-park-rules.yml
+- aid: university-of-maryland-college-park:university-of-maryland-college-park-makerspace-api
+  name: University of Maryland College Park Makerspace API
+  description: >-
+    The Makerspace API from University of Maryland College Park — 1 operation(s) for makerspace.
+  humanURL: https://opendata.lib.umd.edu/services/library-website-tools/
+  baseURL: https://api.www.lib.umd.edu/api/libtools
+  tags:
+  - Makerspace
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-maryland-college-park-makerspace-api-openapi.yml
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/library-website-tools/
+  - type: InteractiveDocumentation
+    url: https://api.www.lib.umd.edu/api/libtools/docs
+  - type: GitHub
+    url: https://github.com/umd-lib/website-libtools
+  - type: Rules
+    url: rules/university-of-maryland-college-park-rules.yml
+- aid: university-of-maryland-college-park:university-of-maryland-college-park-mckeldin-api
+  name: University of Maryland College Park Mckeldin API
+  description: The Mckeldin API from University of Maryland College Park — 3 operation(s) for mckeldin.
+  humanURL: https://opendata.lib.umd.edu/services/library-website-tools/
+  baseURL: https://api.www.lib.umd.edu/api/libtools
+  tags:
+  - Mckeldin
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-maryland-college-park-mckeldin-api-openapi.yml
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/library-website-tools/
+  - type: InteractiveDocumentation
+    url: https://api.www.lib.umd.edu/api/libtools/docs
+  - type: GitHub
+    url: https://github.com/umd-lib/website-libtools
+  - type: Rules
+    url: rules/university-of-maryland-college-park-rules.yml
+- aid: university-of-maryland-college-park:university-of-maryland-college-park-mspal-api
+  name: University of Maryland College Park Mspal API
+  description: The Mspal API from University of Maryland College Park — 3 operation(s) for mspal.
+  humanURL: https://opendata.lib.umd.edu/services/library-website-tools/
+  baseURL: https://api.www.lib.umd.edu/api/libtools
+  tags:
+  - Mspal
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-maryland-college-park-mspal-api-openapi.yml
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/library-website-tools/
+  - type: InteractiveDocumentation
+    url: https://api.www.lib.umd.edu/api/libtools/docs
+  - type: GitHub
+    url: https://github.com/umd-lib/website-libtools
+  - type: Rules
+    url: rules/university-of-maryland-college-park-rules.yml
+- aid: university-of-maryland-college-park:university-of-maryland-college-park-stem-api
+  name: University of Maryland College Park Stem API
+  description: The Stem API from University of Maryland College Park — 3 operation(s) for stem.
+  humanURL: https://opendata.lib.umd.edu/services/library-website-tools/
+  baseURL: https://api.www.lib.umd.edu/api/libtools
+  tags:
+  - Stem
+  properties:
+  - type: OpenAPI
+    url: openapi/university-of-maryland-college-park-stem-api-openapi.yml
+  - type: Documentation
+    url: https://opendata.lib.umd.edu/services/library-website-tools/
+  - type: InteractiveDocumentation
+    url: https://api.www.lib.umd.edu/api/libtools/docs
+  - type: GitHub
+    url: https://github.com/umd-lib/website-libtools
+  - type: Rules
+    url: rules/university-of-maryland-college-park-rules.yml
 common:
 - type: Website
   url: https://www.umd.edu
