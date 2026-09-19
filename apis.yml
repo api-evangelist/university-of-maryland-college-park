@@ -176,6 +176,12 @@ apis:
   - SAML
   - Shibboleth
   - InCommon
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - InCommon
   - Single Sign-On
   properties:
   - type: APIReference
@@ -554,6 +560,8 @@ apis:
   humanURL: https://opendata.lib.umd.edu/services/library-website-tools/
   baseURL: https://api.www.lib.umd.edu/api/libtools
   tags:
+  - STEM
+  tags_raw:
   - Stem
   properties:
   - type: OpenAPI
