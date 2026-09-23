@@ -1,0 +1,60 @@
+generated: '2026-08-30'
+method: probed
+source: live probes plus the umd-lib GitHub organisation and opendata.lib.umd.edu, 2026-08-30
+x-operator: institution
+provider: University of Maryland College Park
+providerId: university-of-maryland-college-park
+description: >-
+  Versioning, change communication and deprecation posture for the surfaces the University of
+  Maryland operates itself. The institution runs its library API estate as ordinary software
+  rather than as a versioned product: source is public and actively committed, but there is no
+  version negotiation, no deprecation policy and no changelog aimed at API consumers.
+versioning:
+  strategy: none
+  detail: >-
+    The Website Tools API carries info.version 0.1.0 — the FastAPI default, never bumped — and no
+    version segment in its path. The OAI-PMH endpoints negotiate protocolVersion 2.0, which is the
+    protocol's version, not the deployment's.
+  evidence:
+  - url: https://api.www.lib.umd.edu/api/libtools/openapi.json
+    status: 200
+    note: 'info.version: 0.1.0, servers: [{url: /api/libtools}] — no version path segment.'
+  - url: https://api.fcrepo.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+    note: protocolVersion 2.0, granularity YYYY-MM-DDThh:mm:ssZ.
+deprecation:
+  policy_published: false
+  sunset_header: false
+  detail: No deprecation policy, Sunset header, or end-of-life notice found on any surface.
+change_communication:
+  changelog: false
+  blog:
+    url: https://opendata.lib.umd.edu/posts/
+    status: 200
+    note: >-
+      A service-announcement blog on the Open Data site — four posts in 2026 announcing new
+      services and a site migration. It is announcement, not a machine-readable changelog, and
+      carries no breaking-change notices.
+  atom_feed:
+    url: https://opendata.lib.umd.edu/index.xml
+    note: Hugo feed advertised by the Open Data site.
+  source_of_truth:
+    url: https://github.com/umd-lib
+    status: 200
+    note: >-
+      UMD Libraries develop in the open. Public repositories back every surface in this profile —
+      website-libtools (the Website Tools API), papaya (IIIF Presentation), archelon and
+      umd-fcrepo-* (digital collections), avalon (A/V), DSpace and dspace-angular (DRUM),
+      umd-lib-opendata (the Open Data site). Commit activity is current.
+availability_events:
+- date: '2026-08-30'
+  surface: DRUM institutional repository
+  status: 503
+  detail: >-
+    drum.lib.umd.edu and its api.drum.lib.umd.edu API host served a "Maintenance" page for the
+    duration of this review. No status page, no maintenance window notice, and no Retry-After
+    were published anywhere the public could find them.
+gaps:
+- No status page. status.umd.edu does not complete a TLS handshake and no library status host was found.
+- info.version has never moved off the framework default.
+- No Sunset or Deprecation headers on any operation.

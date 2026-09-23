@@ -1,0 +1,44 @@
+{
+  "generated": "2026-08-30",
+  "method": "probed",
+  "source": "https://api.www.lib.umd.edu/api/libtools/art/details",
+  "x-operator": "institution",
+  "operationId": "app_art_raw_art_details_get",
+  "request": {
+    "method": "GET",
+    "url": "https://api.www.lib.umd.edu/api/libtools/art/details"
+  },
+  "response": {
+    "status": 200,
+    "contentType": "application/json"
+  },
+  "note": "Live response captured on 2026-08-30, truncated to the first space record. The full response is an array containing one array of LibCal space objects.",
+  "example": [
+    [
+      {
+        "id": 86468,
+        "name": "Seminar Room M2213A",
+        "description": "<p>Art and Art History Faculty and Graduate Seminar Room</p>\r\n\r\n<p>Conference Room on mezzanine level of the Art Library. Capacity is 9-10. Room includes table, chairs, and projector.&nbsp;</p>\r\n\r\n<p>Bookings are restricted by email domain. Please use your UMD email to book space within the Library.</p>\r\n",
+        "termsAndConditions": "<p>Users may reserve up to four hours per reservation and may book up to 30 minutes in advance.</p>\r\n\r\n<p><strong>Users must reply to the confirmation email in order to complete the reservation.</strong></p>\r\n\r\n<p>Food and drink is permitted.</p>\r\n",
+        "image": "",
+        "image_alt_text": "",
+        "capacity": 20,
+        "formid": 0,
+        "isBookableAsWhole": true,
+        "isEventLocation": true,
+        "zoneId": 0,
+        "google": false,
+        "exchange": false,
+        "filter_ids": [
+          5066
+        ],
+        "zoneName": "",
+        "groupId": 23069,
+        "groupName": "Art Library Seminar Room in Art Sociology Building",
+        "groupTermsAndConditions": "",
+        "locationTermsAndConditions": "<p>Users may reserve up to four hours per reservation and may book up to 30 minutes in advance.</p>\r\n\r\n<p><strong>Users must reply to the confirmation email in order to complete the reservation.</strong></p>\r\n\r\n<p>Food and drink is permitted.</p>\r\n",
+        "availability": []
+      }
+    ]
+  ]
+}

@@ -3,55 +3,143 @@ name: University of Maryland College Park
 description: University of Maryland College Park public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reviews:
-  - date: '2026-06-03'
-    rating: 3
-    summary: >-
-      UMD has no central official public developer portal. The strongest
-      confirmed, documented programmatic footprint is umd.io, a student-run
-      open-source REST API at api.umd.io/v1 (verified live, 200) covering
-      courses, sections, professors, bus, map/buildings, and majors with docs at
-      beta.umd.io (200). The Registrar's Testudo Schedule of Classes is a public
-      web app (200) but not a documented JSON API. The DRUM DSpace repository is
-      publicly browsable (200) though standard OAI-PMH/REST endpoint paths
-      returned 404. Identity SSO (Shibboleth) and a status page were probed but
-      are not public APIs. No endpoints were fabricated; only confirmed URLs are
-      cataloged.
-    endpoints:
-      - url: https://umd.io
-        status: 200
-        note: umd.io landing page, student-run open API project.
-      - url: https://beta.umd.io
-        status: 200
-        note: umd.io v1 API documentation (endpoints, base URL).
-      - url: https://api.umd.io/v1/courses
-        status: 200
-        note: Live umd.io v1 courses endpoint, JSON, no auth.
-      - url: https://api.umd.io/v1
-        status: 200
-        note: umd.io v1 base URL responds.
-      - url: https://github.com/umdio
-        status: 200
-        note: umd.io GitHub org (umdio, umdio-data, website repos).
-      - url: https://app.testudo.umd.edu/soc/
-        status: 200
-        note: Testudo Schedule of Classes public web interface.
-      - url: https://www.testudo.umd.edu/
-        status: 200
-        note: Office of the Registrar Testudo portal.
-      - url: https://drum.lib.umd.edu
-        status: 200
-        note: DRUM DSpace institutional repository, public.
-      - url: https://drum.lib.umd.edu/server/oai/request?verb=Identify
-        status: 404
-        note: DSpace OAI-PMH endpoint not found at standard path.
-      - url: https://www.umd.edu
-        status: 200
-        note: Official university website.
-      - url: https://shib.idm.umd.edu/shibboleth-idp/profile/SAML2/Redirect/SSO
-        status: 500
-        note: Shibboleth SAML IdP (SSO, not a public API).
-      - url: https://status.umd.edu
-        status: 0
-        note: No public status page resolved at this host.
+- date: '2026-08-30'
+  rating: 6
+  pipeline: university
+  summary: >-
+    Re-profiled under the university pipeline, which settles WHO OPERATES each surface before saving any
+    contract. The June 2026 profile was wrong at its centre: all five OpenAPIs and the eleven derived
+    artifact sets in this repository described umd.io, an independent student-run project on a
+    NameCheap-registered .io domain hosted at DigitalOcean whose own site states "we aren't the school,
+    and we aren't a corporation". UMD neither operates nor endorses it. Those artifacts were removed file
+    by file and the relationship re-recorded as a single tenant-class entry. In their place, real
+    institution-operated surfaces were found on umd.edu hosts, none of which had been catalogued: UMD
+    Libraries run an Open Data developer portal at opendata.lib.umd.edu documenting a keyless OpenAPI
+    3.1.0 service for library hours and space availability, three live OAI-PMH 2.0 endpoints, an
+    OpenSearch 1.1 descriptor, and IIIF Image and Presentation servers; and the Division of IT publishes
+    SAML 2.0 metadata as InCommon entity urn:mace:incommon:umd.edu with Research and Scholarship category
+    and SIRTFI assurance. Three education-regime domain standards are now evidenced from live protocol
+    responses rather than from prose: oai-pmh, saml, shibboleth. DRUM, the DSpace institutional
+    repository, was down for maintenance across every host for the whole review, so no DataCite or ORCID
+    conformance is claimed. A second pass the same day found two further surfaces the first had missed.
+    The university runs its own ArcGIS Enterprise 12.1 at gis.umd.edu — the machine-readable backend of
+    the official campus map — whose REST service catalog, server info and portal endpoints answer keyless
+    JSON while all fourteen service folders return an ArcGIS error 499 "Token Required" inside an HTTP
+    200; it is recorded as an institution-operated but gated surface, and the 499-in-200 shape is written
+    into errors/ because grading it on status codes alone would score fourteen closed folders as open.
+    The Internet Archive collection university_maryland_cp — the tenth of ten services UMD Libraries
+    document and the only one absent from this profile — is recorded as tenant. The authentication and
+    scopes artifacts were corrected: both had asserted that every institution-operated surface is keyless,
+    which the GIS finding makes false. Expect the composite to move on substance, not volume: artifact
+    count fell while first-party, verifiable surface area rose.
+  endpoints:
+  - url: https://gis.umd.edu/arcgis/rest/services?f=json
+    status: 200
+    note: 'Institution-operated ArcGIS Server 12.1.0; 14 service folders enumerated with no credential.'
+  - url: https://gis.umd.edu/arcgis/rest/services/Navigation?f=json
+    status: 200
+    note: 'Body is an ArcGIS error 499 "Token Required". Gated, not dead, and not open.'
+  - url: https://gis.umd.edu/portal/sharing/rest?f=json
+    status: 200
+    note: ArcGIS Portal 2026.1 on UMD's own host.
+  - url: https://archive.org/advancedsearch.php?q=collection:(university_maryland_cp)
+    status: 200
+    note: numFound 10,674 in the UMD College Park collection.
+  - url: https://opendata.umd.edu/
+    status: 200
+    note: University-wide Data Management and Open Data site, distinct from the Libraries' Open Data site.
+  - url: https://opendata.lib.umd.edu/
+    status: 200
+    note: UMD Libraries Open Data site — the institution's real developer portal. Not previously catalogued.
+  - url: https://api.www.lib.umd.edu/api/libtools/openapi.json
+    status: 200
+    note: Institution-operated OpenAPI 3.1.0, 13 keyless GET operations. Harvested to openapi/_original/.
+  - url: https://api.www.lib.umd.edu/api/libtools/docs
+    status: 200
+    note: Swagger UI served by the service itself.
+  - url: https://api.www.lib.umd.edu/api/libtools/mckeldin/availability
+    status: 200
+    note: Live JSON, no credential. Captured to examples/ and schema derived to json-schema/.
+  - url: https://api.www.lib.umd.edu/api/libtools/nope
+    status: 404
+    note: '{"detail":"Not Found"} — undeclared in the contract. Recorded in errors/.'
+  - url: https://api.www.lib.umd.edu/api/libtools/mckeldin/details?availability=
+    status: 500
+    note: Plain-text 500 where the contract declares a 422 JSON envelope. The one contract-to-behaviour divergence found.
+  - url: https://api.fcrepo.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+    note: 'OAI-PMH 2.0. repositoryName "UMD Libraries", adminEmail lib-ssdr@umd.edu, records from 2014.'
+  - url: https://api.av.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+    note: 'OAI-PMH 2.0 over the Avalon A/V deployment. adminEmail lib-dpi@umd.edu.'
+  - url: https://archives-api.lib.umd.edu/oai?verb=Identify
+    status: 200
+    note: 'OAI-PMH 2.0 over ArchivesSpace. adminEmail aspace-oai@umd.edu.'
+  - url: https://archives-api.lib.umd.edu/oai?verb=ListSets
+    status: 200
+    note: 'Sets returned: class, collection, file, fonds, item.'
+  - url: https://av.lib.umd.edu/catalog/opensearch.xml
+    status: 200
+    note: OpenSearch 1.1 description document for the Avalon catalog.
+  - url: https://av.lib.umd.edu/catalog.json
+    status: 200
+    note: Paginated JSON:API-shaped MediaObject records, keyless.
+  - url: https://shib.idm.umd.edu/idp/shibboleth
+    status: 200
+    note: >-
+      SAML 2.0 EntityDescriptor, entityID urn:mace:incommon:umd.edu, scope umd.edu, InCommon and REFEDS
+      Research and Scholarship categories, REFEDS SIRTFI assurance. The June review probed the SSO
+      endpoint (500) and concluded there was no public surface; the metadata endpoint was never tried.
+  - url: https://iiif.lib.umd.edu/images/
+    status: 200
+    note: Cantaloupe 5.0.5 IIIF image server.
+  - url: https://iiif.lib.umd.edu/manifests/
+    status: 200
+    note: Papaya 1.2.0 — UMD Libraries' own IIIF Presentation API application.
+  - url: https://drum.lib.umd.edu
+    status: 503
+    note: >-
+      Maintenance page across the whole DRUM host. The June review recorded 200 here and a 404 on the
+      OAI path; the documented API host is api.drum.lib.umd.edu, which the June review never tried.
+  - url: https://api.drum.lib.umd.edu/server/api
+    status: 404
+    note: Documented DSpace REST base, unreachable while DRUM is in maintenance.
+  - url: https://app.testudo.umd.edu/soc/
+    status: 200
+    note: Registrar Schedule of Classes. Web application only; no JSON representation.
+  - url: https://umd.io
+    status: 200
+    note: >-
+      Student-run project. Site states "we aren't the school, and we aren't a corporation". WHOIS shows a
+      NameCheap registration on DigitalOcean nameservers. Reclassified institution -> tenant.
+  - url: https://api.umd.io/v1/courses
+    status: 200
+    note: Live, keyless — and not the university's contract.
+  - url: https://data.umd.edu
+    status: 200
+    note: >-
+      NOT an open-data portal. It is the UMD Data Science undergraduate minor website. Probed because the
+      host pattern is the university open-data convention; not catalogued.
+  - url: https://api.umd.edu
+    status: 0
+    note: Does not resolve. No central university API host exists.
+  - url: https://developer.umd.edu
+    status: 0
+    note: Does not resolve. No central developer portal exists.
+  - url: https://status.umd.edu
+    status: 0
+    note: TLS handshake fails. No public status page.
+  - url: https://umd.edu/llms.txt
+    status: 404
+  - url: https://umd.edu/.well-known/security.txt
+    status: 404
+- date: '2026-06-03'
+  rating: 3
+  summary: >-
+    Original profile. Concluded that umd.io was UMD's most prominent programmatic access and catalogued
+    its OpenAPI as the institution's own. Superseded by the 2026-08-30 university-pipeline review: the
+    operator attribution was wrong, and the institution's real machine-readable surfaces — the UMD
+    Libraries Open Data portal, three OAI-PMH endpoints, IIIF, and the Shibboleth SAML metadata — were
+    all missed.

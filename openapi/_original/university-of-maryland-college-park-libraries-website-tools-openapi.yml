@@ -1,0 +1,504 @@
+# x-archived-from: university-of-maryland-college-park-libraries-website-tools-openapi.yml
+# x-archived-on: 2026-09-16
+# generated: '2026-08-30'
+# method: searched
+# source: https://api.www.lib.umd.edu/api/libtools/openapi.json
+# x-operator: institution
+openapi: 3.1.0
+info:
+  title: UMD Libraries Website Tools API
+  summary: Library hours, bookable-space availability and space details for the University of Maryland Libraries.
+  description: 'The Website Tools API is API middleware operated by the University of Maryland Libraries. It fronts
+    the Libraries'' Springshare LibApps/LibCal tenancy and exposes today''s open/closed status, current bookable-space
+    availability, and raw space records for five UMD library locations (McKeldin, STEM, the STEM Makerspace, the
+    Michelle Smith Performing Arts Library, and the Art Library). It is the read side of the umd-lib/website-libtools
+    service and drives the hours and room-availability widgets on www.lib.umd.edu.
+
+
+    The service is documented on the UMD Libraries Open Data site at https://opendata.lib.umd.edu/services/library-website-tools/
+    and requires no API key. All operations are GET and read-only.
+
+
+    Interface note: the upstream document is the FastAPI-generated OpenAPI served at https://api.www.lib.umd.edu/api/libtools/openapi.json.
+    That document carries the framework default info.title of ''FastAPI'' and a relative server of ''/api/libtools''.
+    This refined copy names the service, absolutises the server URL, and adds tags, human descriptions, probed response
+    schemas and the observed 404 shape. The pristine harvested document is kept at openapi/_original/. No operation
+    or parameter was added or removed.'
+  version: 0.1.0
+  contact:
+    name: University of Maryland Libraries
+    url: https://opendata.lib.umd.edu/contact/
+  x-source: https://api.www.lib.umd.edu/api/libtools/openapi.json
+  x-operator: institution
+externalDocs:
+  description: UMD Libraries Open Data — Library Website Tools
+  url: https://opendata.lib.umd.edu/services/library-website-tools/
+servers:
+- url: https://api.www.lib.umd.edu/api/libtools
+  description: Production
+tags:
+- name: hours
+  description: Open/closed status for a library location.
+- name: spaces
+  description: Bookable study rooms, carrels and equipment.
+paths:
+  /mckeldin/details:
+    get:
+      summary: Raw space records for McKeldin Library
+      description: Returns the unfiltered LibCal space records for McKeldin Library, including each bookable space
+        id, name, capacity, zone, group, and terms and conditions.
+      operationId: app_mckeldin_raw_mckeldin_details_get
+      tags:
+      - spaces
+      parameters:
+      - name: availability
+        in: query
+        required: false
+        schema:
+          default: full
+          title: Availability
+        description: LibCal availability window. Defaults to 'full'. An empty value is rejected upstream with a
+          500 rather than the declared 422.
+        example: full
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-details-schema.json
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /mckeldin/availability:
+    get:
+      summary: Space availability for McKeldin Library
+      description: Returns current bookable-space availability for McKeldin Library, grouped by space group, with
+        available and total counts and the next available start time.
+      operationId: app_mckeldin_spaces_mckeldin_availability_get
+      tags:
+      - spaces
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-availability-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /mckeldin/hours/today:
+    get:
+      summary: Today's open status for McKeldin Library
+      description: Returns today's open/closed status for McKeldin Library, sourced from the Libraries' Springshare
+        LibCal tenancy.
+      operationId: app_mckeldin_hours_today_mckeldin_hours_today_get
+      tags:
+      - hours
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-hours-today-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /stem/details:
+    get:
+      summary: Raw space records for STEM Library
+      description: Returns the unfiltered LibCal space records for STEM Library, including each bookable space id,
+        name, capacity, zone, group, and terms and conditions.
+      operationId: app_stem_raw_stem_details_get
+      tags:
+      - spaces
+      parameters:
+      - name: availability
+        in: query
+        required: false
+        schema:
+          default: full
+          title: Availability
+        description: LibCal availability window. Defaults to 'full'. An empty value is rejected upstream with a
+          500 rather than the declared 422.
+        example: full
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-details-schema.json
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /stem/availability:
+    get:
+      summary: Space availability for STEM Library
+      description: Returns current bookable-space availability for STEM Library, grouped by space group, with available
+        and total counts and the next available start time.
+      operationId: app_stem_spaces_stem_availability_get
+      tags:
+      - spaces
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-availability-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /stem/hours/today:
+    get:
+      summary: Today's open status for STEM Library
+      description: Returns today's open/closed status for STEM Library, sourced from the Libraries' Springshare
+        LibCal tenancy.
+      operationId: app_stem_hours_today_stem_hours_today_get
+      tags:
+      - hours
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-hours-today-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /makerspace/hours/today:
+    get:
+      summary: Today's open status for STEM Library Makerspace
+      description: Returns today's open/closed status for STEM Library Makerspace, sourced from the Libraries' Springshare
+        LibCal tenancy.
+      operationId: app_makerspace_hours_today_makerspace_hours_today_get
+      tags:
+      - hours
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-hours-today-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /mspal/details:
+    get:
+      summary: Raw space records for Michelle Smith Performing Arts Library
+      description: Returns the unfiltered LibCal space records for Michelle Smith Performing Arts Library, including
+        each bookable space id, name, capacity, zone, group, and terms and conditions.
+      operationId: app_mspal_raw_mspal_details_get
+      tags:
+      - spaces
+      parameters:
+      - name: availability
+        in: query
+        required: false
+        schema:
+          default: full
+          title: Availability
+        description: LibCal availability window. Defaults to 'full'. An empty value is rejected upstream with a
+          500 rather than the declared 422.
+        example: full
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-details-schema.json
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /mspal/availability:
+    get:
+      summary: Space availability for Michelle Smith Performing Arts Library
+      description: Returns current bookable-space availability for Michelle Smith Performing Arts Library, grouped
+        by space group, with available and total counts and the next available start time.
+      operationId: app_mspal_spaces_mspal_availability_get
+      tags:
+      - spaces
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-availability-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /mspal/hours/today:
+    get:
+      summary: Today's open status for Michelle Smith Performing Arts Library
+      description: Returns today's open/closed status for Michelle Smith Performing Arts Library, sourced from the
+        Libraries' Springshare LibCal tenancy.
+      operationId: app_mspal_hours_today_mspal_hours_today_get
+      tags:
+      - hours
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-hours-today-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /art/details:
+    get:
+      summary: Raw space records for Art Library
+      description: Returns the unfiltered LibCal space records for Art Library, including each bookable space id,
+        name, capacity, zone, group, and terms and conditions.
+      operationId: app_art_raw_art_details_get
+      tags:
+      - spaces
+      parameters:
+      - name: availability
+        in: query
+        required: false
+        schema:
+          default: full
+          title: Availability
+        description: LibCal availability window. Defaults to 'full'. An empty value is rejected upstream with a
+          500 rather than the declared 422.
+        example: full
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-details-schema.json
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /art/availability:
+    get:
+      summary: Space availability for Art Library
+      description: Returns current bookable-space availability for Art Library, grouped by space group, with available
+        and total counts and the next available start time.
+      operationId: app_art_spaces_art_availability_get
+      tags:
+      - spaces
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-availability-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+  /art/hours/today:
+    get:
+      summary: Today's open status for Art Library
+      description: Returns today's open/closed status for Art Library, sourced from the Libraries' Springshare LibCal
+        tenancy.
+      operationId: app_art_hours_today_art_hours_today_get
+      tags:
+      - hours
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-hours-today-schema.json
+        '404':
+          description: Unknown path.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  detail:
+                    type: string
+                required:
+                - detail
+              example:
+                detail: Not Found
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

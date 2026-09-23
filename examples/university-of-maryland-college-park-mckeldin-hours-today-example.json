@@ -1,0 +1,19 @@
+{
+  "generated": "2026-08-30",
+  "method": "probed",
+  "source": "https://api.www.lib.umd.edu/api/libtools/mckeldin/hours/today",
+  "x-operator": "institution",
+  "operationId": "app_mckeldin_hours_today_mckeldin_hours_today_get",
+  "request": {
+    "method": "GET",
+    "url": "https://api.www.lib.umd.edu/api/libtools/mckeldin/hours/today"
+  },
+  "response": {
+    "status": 200,
+    "contentType": "application/json"
+  },
+  "note": "Live response captured on 2026-08-30. The service returns only a status token when the location is closed.",
+  "example": {
+    "status": "closed"
+  }
+}

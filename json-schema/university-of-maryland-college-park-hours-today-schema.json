@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-hours-today-schema.json",
+  "title": "UMD Libraries today's open status",
+  "description": "Today's open/closed status for one UMD library location, sourced from Springshare LibCal. Derived from a live probe \u2014 the upstream OpenAPI declares an untyped 200 body.",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "description": "Open state for today.",
+      "examples": [
+        "closed",
+        "open"
+      ]
+    },
+    "hours": {
+      "type": [
+        "array",
+        "string",
+        "null"
+      ],
+      "description": "Published hours for today when the location is open. Absent in the closed response observed on probe."
+    }
+  },
+  "required": [
+    "status"
+  ],
+  "additionalProperties": true,
+  "x-generated": "2026-08-30",
+  "x-method": "derived",
+  "x-source": "live probe of https://api.www.lib.umd.edu/api/libtools (2026-08-30)",
+  "x-operator": "institution"
+}

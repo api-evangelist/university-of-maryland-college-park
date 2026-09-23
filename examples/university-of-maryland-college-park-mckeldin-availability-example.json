@@ -1,0 +1,56 @@
+{
+  "generated": "2026-08-30",
+  "method": "probed",
+  "source": "https://api.www.lib.umd.edu/api/libtools/mckeldin/availability",
+  "x-operator": "institution",
+  "operationId": "app_mckeldin_spaces_mckeldin_availability_get",
+  "request": {
+    "method": "GET",
+    "url": "https://api.www.lib.umd.edu/api/libtools/mckeldin/availability"
+  },
+  "response": {
+    "status": 200,
+    "contentType": "application/json"
+  },
+  "note": "Live response captured on 2026-08-30. Keys are LibCal space-group ids; overall_available and total are group-level aggregates.",
+  "example": {
+    "23067": {
+      "name": "McKeldin Library Study Carrels",
+      "available": "0",
+      "total": "59",
+      "next_available": "2026-08-31T08:00:00-04:00"
+    },
+    "40070": {
+      "name": "McKeldin Library Conversation Room ",
+      "available": "0",
+      "total": "1",
+      "next_available": "2026-08-31T08:00:00-04:00"
+    },
+    "23082": {
+      "name": "McKeldin Library Family Study Room 3233",
+      "available": "0",
+      "total": "1",
+      "next_available": "2026-08-31T08:00:00-04:00"
+    },
+    "23065": {
+      "name": "McKeldin Library Terrapin Learning Commons Group Study Rooms",
+      "available": "0",
+      "total": "11",
+      "next_available": "2026-08-31T08:00:00-04:00"
+    },
+    "30085": {
+      "name": "McKeldin Library Terrapin Learning Commons Podcasting Lab",
+      "available": "0",
+      "total": "1",
+      "next_available": "2026-08-31T08:00:00-04:00"
+    },
+    "23071": {
+      "name": "McKeldin Library Faculty Office Room 7233",
+      "available": "0",
+      "total": "1",
+      "next_available": "2026-08-31T08:00:00-04:00"
+    },
+    "overall_available": 0,
+    "total": 74
+  }
+}

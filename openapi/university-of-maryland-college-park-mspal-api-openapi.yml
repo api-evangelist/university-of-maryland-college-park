@@ -1,0 +1,90 @@
+openapi: 3.2.0
+info:
+  title: Fast Mspal API
+  version: 0.1.0
+servers:
+- url: /api/libtools
+tags:
+- name: Mspal
+paths:
+  /mspal/details:
+    get:
+      summary: App Mspal Raw
+      operationId: app_mspal_raw_mspal_details_get
+      parameters:
+      - name: availability
+        in: query
+        required: false
+        schema:
+          default: full
+          title: Availability
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Mspal
+  /mspal/availability:
+    get:
+      summary: App Mspal Spaces
+      operationId: app_mspal_spaces_mspal_availability_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Mspal
+  /mspal/hours/today:
+    get:
+      summary: App Mspal Hours Today
+      operationId: app_mspal_hours_today_mspal_hours_today_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Mspal
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

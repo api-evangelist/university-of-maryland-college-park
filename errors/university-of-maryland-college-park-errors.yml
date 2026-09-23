@@ -1,0 +1,73 @@
+generated: '2026-08-30'
+method: probed
+source: live error-path probes against https://api.www.lib.umd.edu/api/libtools, 2026-08-30
+x-operator: institution
+provider: University of Maryland College Park
+providerId: university-of-maryland-college-park
+description: >-
+  Observed error behaviour of the University of Maryland's institution-operated surfaces, centred on
+  the Libraries Website Tools API, recorded
+  from live probes rather than from the contract. The contract declares only 200 and 422; the
+  service actually returns 404 and, on one input, 500. Both gaps are recorded here rather than
+  silently normalised into the refined OpenAPI.
+mediaType: application/json
+envelope:
+  shape: '{"detail": "<string>"}'
+  note: FastAPI default error envelope. Not documented upstream.
+errors:
+- status: 404
+  reason: Not Found
+  body: '{"detail":"Not Found"}'
+  contentType: application/json
+  evidence:
+    url: https://api.www.lib.umd.edu/api/libtools/nope
+    status: 404
+  declared_in_contract: false
+  note: Returned for any path outside the 13 declared operations.
+- status: 422
+  reason: Validation Error
+  schema: '#/components/schemas/HTTPValidationError'
+  declared_in_contract: true
+  observed: false
+  note: >-
+    Declared on the six operations that take the availability query parameter. Not reproduced
+    during probing — the one malformed value tried returned 500 instead.
+- status: 500
+  reason: Internal Server Error
+  body: 'Internal Server Error'
+  contentType: text/plain
+  evidence:
+    url: https://api.www.lib.umd.edu/api/libtools/mckeldin/details?availability=
+    status: 500
+  declared_in_contract: false
+  note: >-
+    An empty availability value produces an unhandled upstream failure with a plain-text body,
+    not the declared 422 JSON envelope. This is the single contract-to-behaviour divergence found.
+- status: 503
+  reason: Service Unavailable
+  surface: DRUM institutional repository
+  evidence:
+    url: https://drum.lib.umd.edu/
+    status: 503
+  note: >-
+    Not this API. Recorded because the whole DRUM host, including its documented DSpace REST,
+    OAI-PMH and OpenSearch endpoints at api.drum.lib.umd.edu, served a "Maintenance" page during
+    this review. See x-coverage in apis.yml.
+- status: 200
+  reason: Token Required (ArcGIS error 499 inside a 200)
+  surface: UMD Enterprise GIS — ArcGIS REST Services
+  body: '{"error":{"code":499,"details":[],"message":"Token Required"}}'
+  contentType: application/json
+  evidence:
+    url: https://gis.umd.edu/arcgis/rest/services/Navigation?f=json
+    status: 200
+  declared_in_contract: false
+  note: >-
+    Not this API either, and the most consequential error shape on any UMD-operated host: the
+    transport status is 200 and the failure is only in the body. A reader grading this surface on
+    status codes alone would score fourteen token-gated service folders as open. Recorded because
+    probing status codes rather than bodies is exactly the error this measurement is meant to avoid.
+gaps:
+- No RFC 9457 problem+json anywhere; errors are the framework default envelope.
+- No rate-limit error surface observed; no 429 was produced during probing.
+- No documented error reference on the Open Data site for any of the library surfaces.

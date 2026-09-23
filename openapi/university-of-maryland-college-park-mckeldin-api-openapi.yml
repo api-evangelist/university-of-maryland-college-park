@@ -1,0 +1,90 @@
+openapi: 3.2.0
+info:
+  title: Fast Mckeldin API
+  version: 0.1.0
+servers:
+- url: /api/libtools
+tags:
+- name: Mckeldin
+paths:
+  /mckeldin/details:
+    get:
+      summary: App Mckeldin Raw
+      operationId: app_mckeldin_raw_mckeldin_details_get
+      parameters:
+      - name: availability
+        in: query
+        required: false
+        schema:
+          default: full
+          title: Availability
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Mckeldin
+  /mckeldin/availability:
+    get:
+      summary: App Mckeldin Spaces
+      operationId: app_mckeldin_spaces_mckeldin_availability_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Mckeldin
+  /mckeldin/hours/today:
+    get:
+      summary: App Mckeldin Hours Today
+      operationId: app_mckeldin_hours_today_mckeldin_hours_today_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Mckeldin
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

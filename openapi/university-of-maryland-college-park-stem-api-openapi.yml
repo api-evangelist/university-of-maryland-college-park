@@ -1,0 +1,90 @@
+openapi: 3.2.0
+info:
+  title: Fast Stem API
+  version: 0.1.0
+servers:
+- url: /api/libtools
+tags:
+- name: Stem
+paths:
+  /stem/details:
+    get:
+      summary: App Stem Raw
+      operationId: app_stem_raw_stem_details_get
+      parameters:
+      - name: availability
+        in: query
+        required: false
+        schema:
+          default: full
+          title: Availability
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Stem
+  /stem/availability:
+    get:
+      summary: App Stem Spaces
+      operationId: app_stem_spaces_stem_availability_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Stem
+  /stem/hours/today:
+    get:
+      summary: App Stem Hours Today
+      operationId: app_stem_hours_today_stem_hours_today_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Stem
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

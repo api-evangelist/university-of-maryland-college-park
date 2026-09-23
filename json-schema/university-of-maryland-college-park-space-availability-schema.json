@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/university-of-maryland-college-park/refs/heads/main/json-schema/university-of-maryland-college-park-space-availability-schema.json",
+  "title": "UMD Libraries space availability",
+  "description": "Current bookable-space availability for one UMD library location. Additional properties are LibCal space-group ids as string keys; overall_available and total are location-wide aggregates. Derived from a live probe \u2014 the upstream OpenAPI declares an untyped 200 body.",
+  "type": "object",
+  "properties": {
+    "overall_available": {
+      "type": "integer",
+      "description": "Spaces available right now across every group at this location.",
+      "examples": [
+        0
+      ]
+    },
+    "total": {
+      "type": "integer",
+      "description": "Total bookable spaces at this location.",
+      "examples": [
+        74
+      ]
+    }
+  },
+  "required": [
+    "overall_available",
+    "total"
+  ],
+  "additionalProperties": {
+    "$ref": "#/$defs/spaceGroup"
+  },
+  "$defs": {
+    "spaceGroup": {
+      "type": "object",
+      "title": "Space group",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "LibCal group name.",
+          "examples": [
+            "McKeldin Library Study Carrels"
+          ]
+        },
+        "available": {
+          "type": "string",
+          "description": "Spaces free right now. Serialised as a string by the upstream service.",
+          "examples": [
+            "0"
+          ]
+        },
+        "total": {
+          "type": "string",
+          "description": "Spaces in this group. Serialised as a string by the upstream service.",
+          "examples": [
+            "59"
+          ]
+        },
+        "next_available": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time",
+          "description": "ISO 8601 local start time of the next free slot, or null when none is known.",
+          "examples": [
+            "2026-08-31T08:00:00-04:00"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "available",
+        "total"
+      ],
+      "additionalProperties": true
+    }
+  },
+  "x-generated": "2026-08-30",
+  "x-method": "derived",
+  "x-source": "live probe of https://api.www.lib.umd.edu/api/libtools (2026-08-30)",
+  "x-operator": "institution"
+}

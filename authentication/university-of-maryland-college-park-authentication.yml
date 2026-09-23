@@ -1,0 +1,98 @@
+generated: '2026-08-30'
+method: probed
+source: live unauthenticated requests against each host, 2026-08-30
+x-operator: institution
+provider: University of Maryland College Park
+providerId: university-of-maryland-college-park
+description: >-
+  Authentication posture of the surfaces the University of Maryland actually operates itself.
+  Every institution-operated library and repository read surface confirmed in this profile is open
+  and keyless. The one exception is the campus Enterprise GIS, which publishes its service catalog
+  without a credential and gates every service behind an ArcGIS token. Beyond that, the institution's
+  authentication engineering is concentrated in its SAML identity provider, which authenticates
+  people into vendor platforms rather than authorising API clients.
+surfaces:
+- name: UMD Libraries Website Tools API
+  baseURL: https://api.www.lib.umd.edu/api/libtools
+  scheme: none
+  api_key_required: false
+  evidence:
+    url: https://api.www.lib.umd.edu/api/libtools/mckeldin/availability
+    status: 200
+    note: Full JSON body returned with no Authorization header, no cookie and no key parameter.
+  declared_in_contract: false
+  note: >-
+    The upstream OpenAPI declares no securitySchemes and no security requirement. That matches
+    observed behaviour rather than omitting a requirement.
+- name: UMD Libraries Digital Collections OAI-PMH
+  baseURL: https://api.fcrepo.lib.umd.edu/oai/api
+  scheme: none
+  api_key_required: false
+  evidence:
+    url: https://api.fcrepo.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+    note: OAI-PMH Identify returned unauthenticated.
+- name: UMD Libraries A/V Digital Collections OAI-PMH
+  baseURL: https://api.av.lib.umd.edu/oai/api
+  scheme: none
+  api_key_required: false
+  evidence:
+    url: https://api.av.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+- name: UMD Archival Collections OAI-PMH
+  baseURL: https://archives-api.lib.umd.edu/oai
+  scheme: none
+  api_key_required: false
+  evidence:
+    url: https://archives-api.lib.umd.edu/oai?verb=Identify
+    status: 200
+- name: UMD Shibboleth Identity Provider
+  baseURL: https://shib.idm.umd.edu/idp/shibboleth
+  scheme: saml2
+  api_key_required: false
+  entityID: urn:mace:incommon:umd.edu
+  evidence:
+    url: https://shib.idm.umd.edu/idp/shibboleth
+    status: 200
+    note: >-
+      SAML 2.0 EntityDescriptor served unauthenticated, as the federation protocol requires.
+      This is a browser-SSO identity provider for people, not an OAuth/OIDC authorization
+      server for API clients; it issues no API tokens to third parties.
+  assurance:
+  - https://refeds.org/sirtfi
+  entity_categories:
+  - http://id.incommon.org/category/research-and-scholarship
+  - http://refeds.org/category/research-and-scholarship
+- name: UMD Enterprise GIS — ArcGIS REST Services
+  baseURL: https://gis.umd.edu/arcgis/rest/services
+  scheme: arcgis-token
+  api_key_required: true
+  self_service: false
+  token_endpoint: https://gis.umd.edu/portal/sharing/rest/generateToken
+  evidence:
+    url: https://gis.umd.edu/arcgis/rest/info?f=json
+    status: 200
+    note: >-
+      authInfo.isTokenBasedSecurity true, tokenServicesUrl
+      https://gis.umd.edu/portal/sharing/rest/generateToken.
+  probes:
+  - url: https://gis.umd.edu/arcgis/rest/services?f=json
+    status: 200
+    note: Service catalog root enumerated 14 folders with no credential.
+  - url: https://gis.umd.edu/arcgis/rest/services/Navigation?f=json
+    status: 200
+    note: >-
+      HTTP 200 whose body is {"error":{"code":499,"message":"Token Required"}}. The status code is
+      not the answer here; the body is. Recorded so a reader does not score this folder as open.
+  - url: https://gis.umd.edu/portal/sharing/rest?f=json
+    status: 200
+    note: Portal version document readable unauthenticated.
+  declared_in_contract: true
+  note: >-
+    Tokens are issued by UMD's own ArcGIS Portal to accounts UMD provisions. There is no public
+    registration path, so this is a credentialed internal surface with a public catalog, not a
+    developer programme.
+gaps:
+- No OAuth 2.0 or OpenID Connect authorization server is published for third-party API clients.
+- No developer key issuance, client registration, or self-service credentialing exists on any
+  institution-operated host found in this review.

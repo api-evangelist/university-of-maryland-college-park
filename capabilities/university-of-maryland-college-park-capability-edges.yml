@@ -1,0 +1,25 @@
+slug: university-of-maryland-college-park
+provider: University of Maryland College Park
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: courses
+  spec_file: university-of-maryland-college-park-courses-api-openapi.yml
+  capability_id: BC-4700.40
+  capability_id_l1: BC-4700
+  capability_name: Programme Catalogue Management
+  confidence: 0.8
+  evidence: GET /courses List of courses; GET /courses/sections List of sections; GET /courses/semesters
+    List semesters; GET /courses/departments List departments
+  reason: Read-only publication of the institutional course catalogue with sections, semesters and departments
+    — programme/course catalogue management; some overlap with scheduling records via the Meeting schema.

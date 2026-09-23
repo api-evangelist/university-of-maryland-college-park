@@ -1,0 +1,41 @@
+generated: '2026-08-30'
+method: probed
+source: live requests plus the OpenAPI at https://api.www.lib.umd.edu/api/libtools/openapi.json
+x-operator: institution
+provider: University of Maryland College Park
+providerId: university-of-maryland-college-park
+description: >-
+  Scope inventory for the University of Maryland's institution-operated API surfaces. There are
+  no scopes to inventory. The library and repository surfaces are keyless and read-only, so
+  authorisation there is all-or-nothing at the endpoint rather than partitioned by scope; the one
+  credentialed surface, the campus Enterprise GIS, gates access with an ArcGIS token whose privileges
+  come from a UMD Portal account role, which is not a scope either. This record exists so the absence
+  is a measured finding rather than an untested assumption.
+scopes: []
+findings:
+- surface: UMD Libraries Website Tools API
+  scopes_declared: 0
+  reason: no_auth
+  detail: >-
+    No securitySchemes in the contract and no credential accepted or required on any of the 13
+    GET operations.
+- surface: OAI-PMH endpoints (fcrepo, av, archives)
+  scopes_declared: 0
+  reason: protocol_has_no_scopes
+  detail: >-
+    OAI-PMH 2.0 partitions harvesting by setSpec, not by authorisation scope. ListSets is open
+    on all three endpoints.
+- surface: UMD Enterprise GIS — ArcGIS REST Services
+  scopes_declared: 0
+  reason: token_not_scoped
+  detail: >-
+    ArcGIS Server tokens carry the privileges of the Portal account that requested them; there is no
+    scope parameter on generateToken and no per-service scope vocabulary to enumerate. The service
+    catalog root is readable with no token at all, and every folder beneath it returns error 499.
+- surface: UMD Shibboleth Identity Provider
+  scopes_declared: 0
+  reason: not_an_oauth_server
+  detail: >-
+    SAML 2.0 releases attributes under entity categories, not OAuth scopes. UMD asserts the
+    InCommon and REFEDS Research and Scholarship categories, which govern attribute release to
+    federated service providers rather than API authorisation.

@@ -1,0 +1,90 @@
+openapi: 3.2.0
+info:
+  title: Fast Art API
+  version: 0.1.0
+servers:
+- url: /api/libtools
+tags:
+- name: Art
+paths:
+  /art/details:
+    get:
+      summary: App Art Raw
+      operationId: app_art_raw_art_details_get
+      parameters:
+      - name: availability
+        in: query
+        required: false
+        schema:
+          default: full
+          title: Availability
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Art
+  /art/availability:
+    get:
+      summary: App Art Spaces
+      operationId: app_art_spaces_art_availability_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Art
+  /art/hours/today:
+    get:
+      summary: App Art Hours Today
+      operationId: app_art_hours_today_art_hours_today_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Art
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

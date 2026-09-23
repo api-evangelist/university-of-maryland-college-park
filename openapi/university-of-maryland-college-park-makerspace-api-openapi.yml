@@ -1,0 +1,21 @@
+openapi: 3.2.0
+info:
+  title: Fast Makerspace API
+  version: 0.1.0
+servers:
+- url: /api/libtools
+tags:
+- name: Makerspace
+paths:
+  /makerspace/hours/today:
+    get:
+      summary: App Makerspace Hours Today
+      operationId: app_makerspace_hours_today_makerspace_hours_today_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+      tags:
+      - Makerspace

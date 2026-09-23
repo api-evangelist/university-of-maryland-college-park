@@ -1,0 +1,180 @@
+generated: '2026-08-30'
+method: probed
+source: live protocol probes of institution-operated hosts, 2026-08-30
+x-operator: institution
+provider: University of Maryland College Park
+providerId: university-of-maryland-college-park
+regime: education
+description: >-
+  Domain-standard conformance for the University of Maryland, measured against the Kin Score
+  education regime standards list (scim, lti, oneroster, ed-fi, caliper, qti, oai-pmh,
+  shibboleth, saml, orcid, datacite, crossref). Every entry below is a protocol response
+  fetched from a host under umd.edu, not a prose claim on a web page. Standards not listed
+  under `conformant` were probed or searched for and not confirmed; they are recorded under
+  `not_confirmed` rather than left out.
+conformant:
+- standard: oai-pmh
+  version: '2.0'
+  surface: UMD Libraries Digital Collections
+  endpoint: https://api.fcrepo.lib.umd.edu/oai/api
+  evidence:
+    url: https://api.fcrepo.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+    contentType: application/xml
+    excerpt: >-
+      <repositoryName>UMD Libraries</repositoryName>
+      <baseURL>https://api.fcrepo.lib.umd.edu/oai/api</baseURL>
+      <protocolVersion>2.0</protocolVersion><adminEmail>lib-ssdr@umd.edu</adminEmail>
+      <earliestDatestamp>2014-01-01T00:00:00Z</earliestDatestamp>
+  supporting:
+  - url: https://api.fcrepo.lib.umd.edu/oai/api?verb=ListSets
+    status: 200
+    note: Named sets returned, including diamondback_photos, umd_student_newspapers, prange_child.
+  note: >-
+    Backed by UMD Libraries' own Fedora deployment (umd-lib/umd-fcrepo-*). Host, admin address
+    and repository name are all UMD's.
+- standard: oai-pmh
+  version: '2.0'
+  surface: UMD Libraries Digital Collections Audio/Video
+  endpoint: https://api.av.lib.umd.edu/oai/api
+  evidence:
+    url: https://api.av.lib.umd.edu/oai/api?verb=Identify
+    status: 200
+    contentType: application/xml
+    excerpt: >-
+      <repositoryName>UMD Libraries</repositoryName>
+      <baseURL>https://api.av.lib.umd.edu/oai/api</baseURL>
+      <protocolVersion>2.0</protocolVersion><adminEmail>lib-dpi@umd.edu</adminEmail>
+- standard: oai-pmh
+  version: '2.0'
+  surface: UMD Archival Collections (ArchivesSpace)
+  endpoint: https://archives-api.lib.umd.edu/oai
+  evidence:
+    url: https://archives-api.lib.umd.edu/oai?verb=Identify
+    status: 200
+    contentType: text/xml
+    excerpt: >-
+      <repositoryName>ArchivesSpace OAI Provider</repositoryName>
+      <baseURL>https://archives-api.lib.umd.edu/oai</baseURL>
+      <protocolVersion>2.0</protocolVersion><adminEmail>aspace-oai@umd.edu</adminEmail>
+      <sampleIdentifier>oai:archivesspace//repositories/2/resources/1</sampleIdentifier>
+  supporting:
+  - url: https://archives-api.lib.umd.edu/oai?verb=ListMetadataFormats
+    status: 200
+  - url: https://archives-api.lib.umd.edu/oai?verb=ListSets
+    status: 200
+    note: 'Sets: class, collection, file, fonds, item, and others.'
+  note: >-
+    ArchivesSpace is community open-source software; this deployment, its host and its
+    aspace-oai@umd.edu administrative contact are the institution's.
+- standard: saml
+  version: '2.0'
+  surface: UMD Identity Provider
+  endpoint: https://shib.idm.umd.edu/idp/shibboleth
+  evidence:
+    url: https://shib.idm.umd.edu/idp/shibboleth
+    status: 200
+    contentType: application/xml;charset=UTF-8
+    excerpt: >-
+      <EntityDescriptor entityID="urn:mace:incommon:umd.edu"> ... <IDPSSODescriptor
+      protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol
+      urn:oasis:names:tc:SAML:2.0:protocol"> ... <shibmd:Scope regexp="false">umd.edu</shibmd:Scope>
+      <mdui:DisplayName xml:lang="en">University of Maryland College Park</mdui:DisplayName>
+  note: SAML 2.0 EntityDescriptor served directly by the institution's own IdP host.
+- standard: shibboleth
+  surface: UMD Identity Provider
+  endpoint: https://shib.idm.umd.edu/idp/shibboleth
+  evidence:
+    url: https://shib.idm.umd.edu/idp/shibboleth
+    status: 200
+    excerpt: >-
+      protocolSupportEnumeration includes urn:mace:shibboleth:1.0; the metadata carries a
+      shibmd:Scope element, a Shibboleth metadata extension.
+  federation:
+    name: InCommon
+    entityID: urn:mace:incommon:umd.edu
+    entity_categories:
+    - http://id.incommon.org/category/research-and-scholarship
+    - http://refeds.org/category/research-and-scholarship
+    assurance:
+    - https://refeds.org/sirtfi
+  note: >-
+    An institution-operated, machine-readable, federation-published surface. It is the single
+    most consequential programmable interface UMD runs and it appears in no vendor's catalogue.
+adjacent_standards_confirmed:
+- standard: opensearch
+  version: '1.1'
+  surface: UMD Libraries Digital Collections Audio/Video (Avalon)
+  endpoint: https://av.lib.umd.edu/catalog/opensearch.xml
+  evidence:
+    url: https://av.lib.umd.edu/catalog/opensearch.xml
+    status: 200
+    contentType: application/xml
+    excerpt: >-
+      <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"><ShortName>Avalon</ShortName>
+  note: Not in the education regime standards list, but a real machine-readable discovery contract.
+- standard: iiif
+  surface: UMD Libraries IIIF Services
+  endpoint: https://iiif.lib.umd.edu/
+  evidence:
+  - url: https://iiif.lib.umd.edu/
+    status: 200
+    excerpt: '<h1>IIIF Services</h1> ... Image Server ... Manifest Server'
+  - url: https://iiif.lib.umd.edu/images/
+    status: 200
+    excerpt: Cantaloupe Image Server 5.0.5 (IIIF Image API implementation)
+  - url: https://iiif.lib.umd.edu/manifests/
+    status: 200
+    excerpt: Papaya 1.2.0 — UMD Libraries' own IIIF Presentation API application (umd-lib/papaya)
+  note: Not in the education regime standards list. Recorded because the deployment is the institution's own code.
+- standard: openapi
+  version: 3.1.0
+  surface: UMD Libraries Website Tools API
+  endpoint: https://api.www.lib.umd.edu/api/libtools/openapi.json
+  evidence:
+    url: https://api.www.lib.umd.edu/api/libtools/openapi.json
+    status: 200
+    contentType: application/json
+    excerpt: '{"openapi":"3.1.0","info":{"title":"FastAPI","version":"0.1.0"},...}'
+  note: >-
+    First-party, machine-readable, and served by the institution — but framework-generated and
+    unbranded. Title and version are FastAPI defaults and the server URL is relative.
+not_confirmed:
+- standard: datacite
+  reason: unreachable
+  detail: >-
+    DRUM is UMD's DOI-minting repository and would be where DataCite conformance shows. Every
+    DRUM host served a Maintenance page during this review, so no DataCite metadata could be
+    fetched. Not claimed.
+  evidence:
+  - url: https://drum.lib.umd.edu/
+    status: 503
+  - url: https://api.drum.lib.umd.edu/server/oai/request?verb=Identify
+    status: 404
+- standard: orcid
+  reason: not_found
+  detail: >-
+    No ORCID integration surfaced on any institution-operated machine-readable endpoint probed.
+    UMD's DRUM was the likely home and was unavailable.
+- standard: crossref
+  reason: not_applicable
+  detail: No institution-operated Crossref deposit or query surface found.
+- standard: scim
+  reason: not_found
+  detail: >-
+    No public SCIM endpoint. UMD's identity estate is federated via SAML rather than exposed
+    for provisioning; any SCIM in use is behind the campus perimeter.
+- standard: lti
+  reason: vendor_surface
+  detail: >-
+    UMD's LMS is ELMS-Canvas on Instructure (elms.umd.edu, umd.instructure.com, which redirects
+    to the UMD IdP). LTI conformance there is Instructure's, not the institution's, and is not
+    creditable to UMD under the operator axis.
+- standard: oneroster
+  reason: not_found
+- standard: ed-fi
+  reason: not_found
+- standard: caliper
+  reason: not_found
+- standard: qti
+  reason: not_found
