@@ -28,18 +28,25 @@ x-type: university
 x-category: Public Research University
 type: Index
 deliveryModel:
-  model: self-hosted
-  open_source: true
-  commercial: false
-  callable_host: true
-  label: Institution-operated services · open source on GitHub
-  confidence: high
+  model: saas
+  license_evidence:
+    not_product:
+    - umd-lib/avalon
+    - umd-lib/dspace
+    - umd-lib/papaya
+    - umd-lib/umd-fcrepo-solr
+    - umd-lib/website-libtools
+  open_source: unknown
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: low
   source:
   - openapi
-  - https://github.com/umd-lib
-  - https://opendata.lib.umd.edu/
-  generated: '2026-08-30'
-  method: probed
+  - pricing
+  - repository-not-product
+  generated: '2026-09-25'
+  method: derived
 accessModel:
   pricing: free
   onboarding: none
@@ -338,12 +345,13 @@ apis:
   - Course Catalog
   - Campus Life
   - Student Built
-  - Open-Source
+  - Open Source
   tags_raw:
   - Course Catalog
   - Campus Life
   - Student Built
   - Open Source
+  - Open-Source
   properties:
   - type: Documentation
     url: https://beta.umd.io
