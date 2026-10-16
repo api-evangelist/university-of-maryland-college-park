@@ -2,20 +2,27 @@
   "repo": "university-of-maryland-college-park",
   "feeds": [
     {
+      "source": "https://today.umd.edu/rss",
+      "feed_url": "https://today.umd.edu/rss",
+      "saved": 0,
+      "error": "no_feed_no_posts"
+    },
+    {
+      "source": "https://opendata.lib.umd.edu/index.xml",
+      "feed_url": "https://opendata.lib.umd.edu/index.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://opendata.lib.umd.edu/contact/",
       "feed_url": "https://opendata.lib.umd.edu/contact/",
       "title": "",
       "saved": 0,
       "method": "none"
-    },
-    {
-      "source": "https://today.umd.edu/rss",
-      "feed_url": "https://today.umd.edu/rss",
-      "saved": 0,
-      "error": "no_feed_no_posts"
     }
   ],
-  "fetched": "2026-10-03T12:30:02Z",
+  "fetched": "2026-10-10T13:15:00Z",
   "post_count": 10,
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
