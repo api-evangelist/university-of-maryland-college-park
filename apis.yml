@@ -483,6 +483,10 @@ apis:
     umd.instructure.com is an institution-specific subdomain on Instructure's platform; it redirects to
     shib.idm.umd.edu, UMD's identity provider.
   tags:
+  - LMS
+  - Canvas
+  - LTI
+  tags_raw:
   - Learning Management
   - Canvas
   - LTI
